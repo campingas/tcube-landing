@@ -10,7 +10,7 @@
 
 ## The one sentence
 
-> T-Cube is a small, tactile device that reads sentences and lessons aloud to children — in English first, then in other languages — so they learn by listening, at any age, anywhere in the world.
+> T-Cube is a small, tactile device that reads short English sentences aloud to children first — then European and Asian languages — so they learn by listening, at any age, anywhere in the world.
 
 Every section of the landing page must be able to defend its place against this sentence. If a section doesn't help a visitor understand or believe it, cut it.
 
@@ -20,7 +20,7 @@ Every section of the landing page must be able to defend its place against this 
 
 T-Cube the hardware is quiet. It sits on a shelf, or in a child's hands, and does its job without announcing itself. The landing page has the opposite job: it has to speak clearly and quickly to a parent standing in a school corridor, a teacher evaluating tools for a bilingual classroom, or a maker who just discovered the project on GitHub — and it has to earn their trust before they leave.
 
-This is not a product catalogue. It is a conversation starter. The page succeeds when a visitor finishes reading and thinks: *I want this for my child*, or *I want to build this*, or *I want to be part of this*.
+This is not a product catalogue. It is a conversation starter. The page succeeds when a visitor finishes reading and thinks: _I want this for my child_, or _I want to build this_, or _I want to be part of this_.
 
 ---
 
@@ -30,9 +30,9 @@ This is not a product catalogue. It is a conversation starter. The page succeeds
 
 The core audience is parents and caregivers of children between **2 and 14 years old**. Within that range, three distinct moments:
 
-**Toddlers (2–5)** — Parents looking for a first connected object that is safe, screen-free, and doesn't rot attention. The pitch here is physical: a button you press, a story that plays, nothing to scroll or swipe. T-Cube is a child's first encounter with AI — and it is gentle, bounded, and entirely in the hands of the family.
+**Toddlers (2–5)** — Parents looking for a first connected object that is safe, screen-free, and doesn't rot attention. The pitch here is physical: a button you press, a short sentence or tiny recording that plays, nothing to scroll or swipe. T-Cube is a child's first encounter with AI — and it is gentle, bounded, and entirely in the hands of the family.
 
-**Young children (5–10)** — Parents in multilingual families or international school contexts who want their child to build a second or third language naturally, through listening and repetition, without drilling. T-Cube grows with the child: the same device that told bedtime stories in Vietnamese now reads lesson summaries in English or French.
+**Young children (5–10)** — Parents in multilingual families or international school contexts who want their child to build a second or third language naturally, through listening and repetition, without drilling. T-Cube grows with the child: the same device that starts with short English sentence recordings can later read generated practice sentences in French, Spanish, Chinese, Vietnamese, and other languages.
 
 **Older children and tweens (10–14)** — Students who can engage more actively: choosing content, customising their device, sharing designs. T-Cube becomes an object of ownership, not just a toy. This is also where the handoff to the maker orbit begins — the curious 12-year-old who wants to know what's inside the box.
 
@@ -50,7 +50,7 @@ The maker sections do not dilute the family message. They run parallel — the s
 
 ## What the page must communicate
 
-These are the five things a visitor must be able to say after leaving the page. Not remember verbatim — *say*, in their own words.
+These are the five things a visitor must be able to say after leaving the page. Not remember verbatim — _say_, in their own words.
 
 1. **"T-Cube is a device for children that teaches languages through listening."**
    — The product is understood. Not "some kind of AI thing" or "an educational platform".
@@ -74,6 +74,7 @@ These are the five things a visitor must be able to say after leaving the page. 
 ### v1 — Must ship
 
 #### Hero
+
 **Job:** answer "what is this?" in under five seconds.
 
 One headline. One subheadline. One visual. One CTA. Nothing else.
@@ -85,17 +86,21 @@ The hero does not explain features. It creates enough curiosity and trust that a
 ---
 
 #### Product pitch — What T-Cube is and why it exists
+
 **Job:** make the right parents feel seen.
 
 Three sub-sections, each targeting one of the three family moments (toddlers / young children / tweens). Short. Portrait of the child first, product second. No bullet-point feature lists — narrative, not spec.
 
 This is also where the "first AI safe step" argument lives. The framing: most children's first encounter with AI is a screen algorithm serving content at them. T-Cube inverts that — the child controls what plays, there is no feed, no recommendation engine, no screen. It is AI in service of listening, not AI in service of engagement metrics.
 
+Current content focus is intentionally small: short sentence recordings and generated sentence packs. Stories, long lessons, songs, and richer curricula are future content layers, not the immediate product promise.
+
 The Kawaii tactile angle lives here too: the physical interface — the button matrix, the textures, the glow patterns — is designed to be touched, not just pressed. It signals play, not homework.
 
 ---
 
 #### How to build and install
+
 **Job:** make the maker path legible and give technically-curious parents confidence.
 
 This section serves two audiences at once:
@@ -111,6 +116,7 @@ The hardware finder (helping users locate components nearby — Nhật Tảo and
 ---
 
 #### Join the T-Cube community + lead capture
+
 **Job:** convert interest into a relationship.
 
 A short closing section. Two paths, clearly separated:
@@ -120,6 +126,7 @@ A short closing section. Two paths, clearly separated:
 **For makers and contributors:** a link to the GitHub organisation, the community forum or Discord, and the contribution guide.
 
 The CTA copy follows voice rules: specific and direct, not "Sign up for our newsletter".
+
 > "Tell us about your family — we'll let you know when T-Cube is ready near you."
 > "Build with us — the hardware and software are open."
 
@@ -128,13 +135,15 @@ The CTA copy follows voice rules: specific and direct, not "Sign up for our news
 ### Future — Defined but not v1
 
 #### Use cases per age group
+
 A dedicated section or sub-page showing T-Cube in context across the 2–14 range. Day-in-the-life vignettes. What the child presses, what they hear, how the content grows with them.
 
-Deferred because it requires real content (stories, lesson examples, real family photos or illustrations) that don't exist yet. A placeholder with honest "coming soon" framing is acceptable in v1 if the rest of the page is strong.
+Deferred because it requires real content (sentence packs, recordings, lesson examples, real family photos or illustrations) that don't exist yet. A placeholder with honest "coming soon" framing is acceptable in v1 if the rest of the page is strong.
 
 ---
 
 #### Community sharing — button designs, voice patterns, content
+
 The social layer of T-Cube: families and makers sharing their button shapes, glow patterns, and generated content. A gallery. A submission flow. A simple profile for contributors.
 
 This is meaningful but requires backend infrastructure (storage, moderation, accounts) that is out of scope for a static landing page. Defer to v2. In v1, acknowledge the community dimension in the closing section without promising a platform that doesn't exist yet.
@@ -142,6 +151,7 @@ This is meaningful but requires backend infrastructure (storage, moderation, acc
 ---
 
 #### Hardware finder
+
 A tool to help users find Raspberry Pi components, jumper wires, and breakout boards at local markets and suppliers — starting with Nhật Tảo (District 10, Ho Chi Minh City) and expanding by region.
 
 Deferred to v2. Requires a maintained database and a geolocation flow.
@@ -153,7 +163,7 @@ Deferred to v2. Requires a maintained database and a geolocation flow.
 Every visual and copy decision on this page is traceable to one of these four choices:
 
 **1. Families over features.**
-The product is technically interesting. The landing page is not the place to prove it. Parents do not need to understand I2S audio or VITS models — they need to understand that their 4-year-old will press a button and hear a story in Vietnamese. Lead with the child's experience, not the engineer's solution.
+The product is technically interesting. The landing page is not the place to prove it. Parents do not need to understand I2S audio or TTS models — they need to understand that their child will press a button and hear a clear English sentence first, then short practice sentences in other languages. Lead with the child's experience, not the engineer's solution.
 
 **2. Screen-free is a feature, not a limitation.**
 In a market saturated with tablets and apps, the absence of a screen is T-Cube's most differentiating quality. It is not a missing feature. Frame it as a deliberate choice and explain why: listening builds language acquisition, tactile interfaces build fine motor skills, no screen means no algorithm, no endless scroll, no blue light at bedtime.

@@ -15,9 +15,9 @@ const html = /* html */ `
     
     <!-- Navigation Links -->
     <div class="hidden md:flex items-center gap-rhythm-5">
-      <a href="#features" class="text-caption font-mono uppercase tracking-wider text-wada-moss hover:text-wada-paper transition-colors focus:ring-1 focus:ring-wada-teal focus:outline-none rounded">Features</a>
-      <a href="#languages" class="text-caption font-mono uppercase tracking-wider text-wada-moss hover:text-wada-paper transition-colors focus:ring-1 focus:ring-wada-teal focus:outline-none rounded">Languages</a>
-      <a href="#hardware" class="text-caption font-mono uppercase tracking-wider text-wada-moss hover:text-wada-paper transition-colors focus:ring-1 focus:ring-wada-teal focus:outline-none rounded">Hardware</a>
+      <a href="#features" class="text-caption font-mono uppercase tracking-wider text-wada-paper/70 hover:text-wada-paper transition-colors focus:ring-1 focus:ring-wada-teal focus:outline-none rounded">Features</a>
+      <a href="#languages" class="text-caption font-mono uppercase tracking-wider text-wada-paper/70 hover:text-wada-paper transition-colors focus:ring-1 focus:ring-wada-teal focus:outline-none rounded">Languages</a>
+      <a href="#hardware" class="text-caption font-mono uppercase tracking-wider text-wada-paper/70 hover:text-wada-paper transition-colors focus:ring-1 focus:ring-wada-teal focus:outline-none rounded">Hardware</a>
       <a href="#cta" class="px-rhythm-3 py-1 bg-wada-slate border border-wada-teal text-wada-teal hover:bg-wada-teal hover:text-wada-paper rounded text-caption font-mono uppercase tracking-wider transition-all duration-300 focus:ring-1 focus:ring-wada-teal focus:outline-none">Get Started</a>
     </div>
   </nav>

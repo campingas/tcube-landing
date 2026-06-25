@@ -6,13 +6,13 @@ export default {
     extend: {
       colors: {
         wada: {
-          ink: '#1a2e2a',
-          teal: '#00978d',
-          salmon: '#d8a37b',
-          rufous: '#c16b27',
-          paper: '#f5ecc2',
-          moss: '#6d7e77',
-          slate: '#253122',
+          ink: '#f5ecc2', // ligth theme 
+          teal: '#f99d1b', //  ligth theme 
+          salmon: '#fdd4bd', //  ligth theme 
+          rufous: '#f6917e', //  ligth theme 
+          paper: '#111314', //  ligth theme 
+          moss: '#6b7140', //  ligth theme 
+          slate: '#ebd3a2', //  ligth theme 
         },
       },
       fontFamily: {
@@ -21,8 +21,14 @@ export default {
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       fontSize: {
-        'display-hero': ['clamp(2.5rem, 8vw, 6.875rem)', { lineHeight: '1.0', letterSpacing: '-0.04em' }],
-        'display-h2': ['clamp(1.75rem, 5vw, 4.25rem)', { lineHeight: '1.05', letterSpacing: '-0.025em' }],
+        'display-hero': [
+          'clamp(2.5rem, 8vw, 6.875rem)',
+          { lineHeight: '1.0', letterSpacing: '-0.04em' },
+        ],
+        'display-h2': [
+          'clamp(1.75rem, 5vw, 4.25rem)',
+          { lineHeight: '1.05', letterSpacing: '-0.025em' },
+        ],
         lead: ['1.625rem', { lineHeight: '1.6' }],
         body: ['1rem', { lineHeight: '1.75' }],
         caption: ['0.625rem', { lineHeight: '1.5' }],

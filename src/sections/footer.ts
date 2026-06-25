@@ -6,12 +6,12 @@ const html = /* html */ `
       <!-- Left side: copyright -->
       <div class="flex flex-col items-center md:items-start text-center md:text-left gap-rhythm-1">
         <span class="font-display font-bold text-wada-paper text-body">T-Cube Project</span>
-        <span class="text-caption text-wada-moss font-body">© 2026 T-Cube. Open educational hardware and software ecosystem.</span>
+        <span class="text-caption text-wada-paper/70 font-body">© 2026 T-Cube. Open educational hardware and software ecosystem.</span>
       </div>
       
       <!-- Right side: details and links -->
       <div class="flex flex-col items-center md:items-end text-center md:text-right gap-rhythm-1">
-        <span class="text-caption text-wada-moss font-mono uppercase tracking-wider">
+        <span class="text-caption text-wada-paper/70 font-mono uppercase tracking-wider">
           Licensed under MIT &amp; CERN-OHL v2
         </span>
         <a href="#" class="text-caption text-wada-teal hover:underline font-mono uppercase tracking-wider">

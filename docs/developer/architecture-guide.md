@@ -11,22 +11,22 @@ This document owns: stack decisions, directory layout, TypeScript and Vite confi
 
 `tcube-landing` is the public entry-point for the T-Cube ecosystem (educational hardware + multilingual content platform). It is a **static site** — no server, no API, no auth. Its single job is to convert a visitor into a curious stakeholder: school decision-maker, parent, or content partner.
 
-Every architectural decision should be filtered through: *does this make the page faster, clearer, or easier to maintain without adding runtime complexity?*
+Every architectural decision should be filtered through: _does this make the page faster, clearer, or easier to maintain without adding runtime complexity?_
 
 ---
 
 ## 2. Stack
 
-| Layer | Choice | Constraint |
-|---|---|---|
-| Bundler | Vite | `^5.x` |
-| Language | TypeScript | `^5.4` strict mode |
-| Styling | Tailwind CSS | `^3.x` JIT (not v4) |
-| Linter | ESLint | `^9.x` flat config |
-| Formatter | Prettier | `^3.x` |
-| Type check | `tsc --noEmit` | part of CI |
-| Package manager | `pnpm` | lockfile committed |
-| Task runner | `just` | mirrors all tcube projects |
+| Layer           | Choice         | Constraint                 |
+| --------------- | -------------- | -------------------------- |
+| Bundler         | Vite           | `^5.x`                     |
+| Language        | TypeScript     | `^5.4` strict mode         |
+| Styling         | Tailwind CSS   | `^3.x` JIT (not v4)        |
+| Linter          | ESLint         | `^9.x` flat config         |
+| Formatter       | Prettier       | `^3.x`                     |
+| Type check      | `tsc --noEmit` | part of CI                 |
+| Package manager | `pnpm`         | lockfile committed         |
+| Task runner     | `just`         | mirrors all tcube projects |
 
 No React, no Vue, no framework. Vanilla TypeScript + Tailwind. If interactivity grows beyond what vanilla can cleanly express, document the decision here before introducing anything.
 
@@ -188,13 +188,13 @@ export default {
       // Source of truth and rationale: branding-guide.md §1
       colors: {
         wada: {
-          ink:    '#1a2e2a',
-          teal:   '#00978d',
+          ink: '#1a2e2a',
+          teal: '#00978d',
           salmon: '#d8a37b',
           rufous: '#c16b27',
-          paper:  '#f5ecc2',
-          moss:   '#6d7e77',
-          slate:  '#253122',
+          paper: '#f5ecc2',
+          moss: '#6d7e77',
+          slate: '#253122',
         },
       },
 
@@ -202,55 +202,61 @@ export default {
       // Source of truth and rationale: branding-guide.md §2
       fontFamily: {
         display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
-        body:    ['"Inter"', 'system-ui', 'sans-serif'],
-        mono:    ['"JetBrains Mono"', 'monospace'],
+        body: ['"Inter"', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       fontSize: {
-        'display-hero': ['clamp(2.5rem, 8vw, 6.875rem)', { lineHeight: '1.0',  letterSpacing: '-0.04em'  }],
-        'display-h2':   ['clamp(1.75rem, 5vw, 4.25rem)', { lineHeight: '1.05', letterSpacing: '-0.025em' }],
-        'lead':         ['1.625rem', { lineHeight: '1.6'  }],
-        'body':         ['1rem',     { lineHeight: '1.75' }],
-        'caption':      ['0.625rem', { lineHeight: '1.5'  }],
+        'display-hero': [
+          'clamp(2.5rem, 8vw, 6.875rem)',
+          { lineHeight: '1.0', letterSpacing: '-0.04em' },
+        ],
+        'display-h2': [
+          'clamp(1.75rem, 5vw, 4.25rem)',
+          { lineHeight: '1.05', letterSpacing: '-0.025em' },
+        ],
+        lead: ['1.625rem', { lineHeight: '1.6' }],
+        body: ['1rem', { lineHeight: '1.75' }],
+        caption: ['0.625rem', { lineHeight: '1.5' }],
       },
 
       // ── Object size scale: φ from seed 24, god = hero × 2 ────────
       // Source of truth and rationale: branding-guide.md §2
       // Usage: w-size-tile, h-size-hero, etc. (requires plugin or safelist)
       spacing: {
-        'size-stamp':  '24px',
-        'size-chip':   '39px',
-        'size-tile':   '63px',
-        'size-block':  '102px',
-        'size-hero':   '164px',
-        'size-god':    '328px',
+        'size-stamp': '24px',
+        'size-chip': '39px',
+        'size-tile': '63px',
+        'size-block': '102px',
+        'size-hero': '164px',
+        'size-god': '328px',
       },
 
       // ── Rhythm spacing: Fibonacci-φ from seed 8 ──────────────────
       // Source of truth and rationale: branding-guide.md §2
       gap: {
-        'rhythm-1':  '8px',
-        'rhythm-2':  '13px',
-        'rhythm-3':  '21px',
-        'rhythm-5':  '34px',
-        'rhythm-8':  '55px',
+        'rhythm-1': '8px',
+        'rhythm-2': '13px',
+        'rhythm-3': '21px',
+        'rhythm-5': '34px',
+        'rhythm-8': '55px',
         'rhythm-13': '89px',
         'rhythm-21': '144px',
       },
 
       // ── Animations ────────────────────────────────────────────────
       animation: {
-        'fade-up':    'fade-up 0.6s ease both',
-        'fade-in':    'fade-in 0.4s ease both',
+        'fade-up': 'fade-up 0.6s ease both',
+        'fade-in': 'fade-in 0.4s ease both',
         'pulse-slow': 'pulse 3s cubic-bezier(0.4,0,0.6,1) infinite',
       },
       keyframes: {
         'fade-up': {
           from: { opacity: '0', transform: 'translateY(1.5rem)' },
-          to:   { opacity: '1', transform: 'translateY(0)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
         },
         'fade-in': {
           from: { opacity: '0' },
-          to:   { opacity: '1' },
+          to: { opacity: '1' },
         },
       },
     },
@@ -291,26 +297,26 @@ export default ts.config(
     },
     rules: {
       // TypeScript
-      '@typescript-eslint/no-explicit-any':            'error',
-      '@typescript-eslint/consistent-type-imports':    ['error', { prefer: 'type-imports' }],
-      '@typescript-eslint/no-unnecessary-condition':   'error',
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
+      '@typescript-eslint/no-unnecessary-condition': 'error',
       '@typescript-eslint/strict-boolean-expressions': 'error',
-      '@typescript-eslint/no-non-null-assertion':      'error',
-      '@typescript-eslint/prefer-nullish-coalescing':  'error',
-      '@typescript-eslint/prefer-optional-chain':      'error',
-      '@typescript-eslint/switch-exhaustiveness-check':'error',
-      '@typescript-eslint/no-floating-promises':       'error',
-      '@typescript-eslint/await-thenable':             'error',
-      '@typescript-eslint/no-misused-promises':        'error',
+      '@typescript-eslint/no-non-null-assertion': 'error',
+      '@typescript-eslint/prefer-nullish-coalescing': 'error',
+      '@typescript-eslint/prefer-optional-chain': 'error',
+      '@typescript-eslint/switch-exhaustiveness-check': 'error',
+      '@typescript-eslint/no-floating-promises': 'error',
+      '@typescript-eslint/await-thenable': 'error',
+      '@typescript-eslint/no-misused-promises': 'error',
 
       // JS quality
-      'no-console':        ['warn', { allow: ['warn', 'error'] }],
-      'no-debugger':       'error',
-      'no-alert':          'error',
-      'prefer-const':      'error',
-      'no-var':            'error',
-      'eqeqeq':            ['error', 'always'],
-      'object-shorthand':  'error',
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'no-debugger': 'error',
+      'no-alert': 'error',
+      'prefer-const': 'error',
+      'no-var': 'error',
+      eqeqeq: ['error', 'always'],
+      'object-shorthand': 'error',
       'no-useless-rename': 'error',
 
       // Import hygiene
@@ -391,32 +397,32 @@ analyse:
 ```html
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#1a2e2a" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1a2e2a" />
 
-  <meta property="og:title"       content="T-Cube — Học bằng cách nghe" />
-  <meta property="og:description" content="…" />
-  <meta property="og:image"       content="/og-image.png" />
-  <meta property="og:type"        content="website" />
+    <meta property="og:title" content="T-Cube — Học bằng cách nghe" />
+    <meta property="og:description" content="…" />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:type" content="website" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <title>T-Cube</title>
-</head>
-<body class="bg-wada-ink text-wada-paper antialiased">
-  <a href="#main-content" class="sr-only focus:not-sr-only">Skip to content</a>
-  <header id="site-header"></header>
-  <main id="main-content">
-    <section id="hero"></section>
-    <section id="features"></section>
-    <section id="languages"></section>
-    <section id="hardware"></section>
-    <section id="cta"></section>
-  </main>
-  <footer id="site-footer"></footer>
-  <script type="module" src="/src/main.ts"></script>
-</body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <title>T-Cube</title>
+  </head>
+  <body class="bg-wada-ink text-wada-paper antialiased">
+    <a href="#main-content" class="sr-only focus:not-sr-only">Skip to content</a>
+    <header id="site-header"></header>
+    <main id="main-content">
+      <section id="hero"></section>
+      <section id="features"></section>
+      <section id="languages"></section>
+      <section id="hardware"></section>
+      <section id="cta"></section>
+    </main>
+    <footer id="site-footer"></footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
 ```
 
@@ -490,7 +496,7 @@ Each `src/sections/*.ts` file exports one `init*()` function:
 import { mount } from '@/utils/dom'
 import { revealOnScroll } from '@/utils/intersection'
 
-const html = /* html */`
+const html = /* html */ `
   <div class="…" data-reveal>…</div>
 `
 
@@ -502,11 +508,11 @@ export function initHero(): void {
 
 ```typescript
 // src/main.ts
-import { initHero }      from '@/sections/hero'
-import { initFeatures }  from '@/sections/features'
+import { initHero } from '@/sections/hero'
+import { initFeatures } from '@/sections/features'
 import { initLanguages } from '@/sections/languages'
-import { initHardware }  from '@/sections/hardware'
-import { initCta }       from '@/sections/cta'
+import { initHardware } from '@/sections/hardware'
+import { initCta } from '@/sections/cta'
 
 document.addEventListener('DOMContentLoaded', () => {
   initHero()
@@ -527,13 +533,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ## 14. Asset Handling
 
-| Asset | Location | Import |
-|---|---|---|
-| SVG (URL) | `src/assets/images/` | `import src from '@/assets/images/icon.svg?url'` |
-| SVG (raw string) | `src/assets/images/` | `import raw from '@/assets/images/icon.svg?raw'` |
-| PNG / JPEG | `src/assets/images/` | `import src from '@/assets/images/photo.jpg'` |
-| Font | `src/assets/fonts/` | `@font-face` in `base.css` |
-| Favicon, OG image | `public/` | path reference in `index.html` |
+| Asset             | Location             | Import                                           |
+| ----------------- | -------------------- | ------------------------------------------------ |
+| SVG (URL)         | `src/assets/images/` | `import src from '@/assets/images/icon.svg?url'` |
+| SVG (raw string)  | `src/assets/images/` | `import raw from '@/assets/images/icon.svg?raw'` |
+| PNG / JPEG        | `src/assets/images/` | `import src from '@/assets/images/photo.jpg'`    |
+| Font              | `src/assets/fonts/`  | `@font-face` in `base.css`                       |
+| Favicon, OG image | `public/`            | path reference in `index.html`                   |
 
 Vite hashes filenames automatically. Never hardcode hashed paths.
 
@@ -541,13 +547,13 @@ Vite hashes filenames automatically. Never hardcode hashed paths.
 
 ## 15. Performance Budget
 
-| Metric | Target |
-|---|---|
-| JS bundle (gzipped) | < 30 KB |
-| CSS bundle (gzipped) | < 20 KB |
-| LCP | < 2.5 s on 4G |
-| CLS | < 0.1 |
-| Render-blocking scripts | zero |
+| Metric                  | Target        |
+| ----------------------- | ------------- |
+| JS bundle (gzipped)     | < 30 KB       |
+| CSS bundle (gzipped)    | < 20 KB       |
+| LCP                     | < 2.5 s on 4G |
+| CLS                     | < 0.1         |
+| Render-blocking scripts | zero          |
 
 Run `just analyse` (with `rollup-plugin-visualizer`) before each release. If the bundle grows unexpectedly, find the cause before merging.
 
@@ -566,7 +572,7 @@ Run `just analyse` (with `rollup-plugin-visualizer`) before each release. If the
 
 ## 17. i18n Strategy
 
-English-first. Vietnamese as a secondary layer on the same page — bilingual labels acceptable, bilingual sentences are not. Full multi-locale routing is out of scope for v1.
+English-first. European languages come next, followed by Asian languages. Vietnamese belongs to the Asian-language roadmap, not the first launch promise. Bilingual labels are acceptable only in language-specific UI, and bilingual sentences are not. Full multi-locale routing is out of scope for v1.
 
 If a locale toggle is introduced: strings in `src/i18n/vi.ts` and `src/i18n/en.ts` as `Record<string, string>`, active locale in `localStorage` key `tcube_locale`, no i18n library.
 
@@ -605,6 +611,7 @@ Inherits from `AGENTS.md`. Scope values for this repo:
 `hero` · `features` · `languages` · `hardware` · `cta` · `a11y` · `perf` · `style` · `config` · `brand`
 
 Examples:
+
 - `feat(hero): add animated device mockup`
 - `fix(a11y): add skip-nav link`
 - `perf(assets): convert hero image to webp`

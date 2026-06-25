@@ -13,27 +13,39 @@ const html = /* html */ `
           <h3 class="font-display text-display-h2 text-wada-paper font-bold mb-rhythm-3 leading-tight">
             For Families
           </h3>
-          <p class="text-wada-moss text-body font-body mb-rhythm-5">
-            Tell us about your family — we'll let you know when T-Cube is ready near you.
+          <p class="text-wada-paper/85 text-body font-body mb-rhythm-5">
+            Tell us about your family and we will let you know when T-Cube is ready near you.
           </p>
           
           <form class="space-y-rhythm-3 mb-rhythm-5" id="interest-form" onsubmit="event.preventDefault()">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-rhythm-2">
               <div>
-                <label for="family-name" class="block text-caption font-mono text-wada-moss uppercase mb-1.5 tracking-wider">Parent Name</label>
-                <input type="text" id="family-name" placeholder="Anh/Chị..." class="w-full bg-wada-ink/80 text-wada-paper border border-wada-moss/30 p-rhythm-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-wada-teal focus:border-transparent text-body font-body placeholder:text-wada-moss/45" required />
+                <label for="family-name" class="block text-caption font-mono text-wada-paper/80 uppercase mb-1.5 tracking-wider">Parent Name</label>
+                <input type="text" id="family-name" placeholder="Anh/Chị..." class="w-full bg-wada-ink/80 text-wada-paper border border-wada-moss/30 p-rhythm-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-wada-teal focus:border-transparent text-body font-body placeholder:text-wada-paper/45" required />
               </div>
               <div>
-                <label for="family-email" class="block text-caption font-mono text-wada-moss uppercase mb-1.5 tracking-wider">Email Address</label>
-                <input type="email" id="family-email" placeholder="name@domain.com" class="w-full bg-wada-ink/80 text-wada-paper border border-wada-moss/30 p-rhythm-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-wada-teal focus:border-transparent text-body font-body placeholder:text-wada-moss/45" required />
+                <label for="family-email" class="block text-caption font-mono text-wada-paper/80 uppercase mb-1.5 tracking-wider">Email Address</label>
+                <input type="email" id="family-email" placeholder="name@domain.com" class="w-full bg-wada-ink/80 text-wada-paper border border-wada-moss/30 p-rhythm-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-wada-teal focus:border-transparent text-body font-body placeholder:text-wada-paper/45" required />
+              </div>
+              <div>
+                <label for="family-city" class="block text-caption font-mono text-wada-paper/80 uppercase mb-1.5 tracking-wider">City</label>
+                <input type="text" id="family-city" placeholder="Ho Chi Minh City" class="w-full bg-wada-ink/80 text-wada-paper border border-wada-moss/30 p-rhythm-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-wada-teal focus:border-transparent text-body font-body placeholder:text-wada-paper/45" />
+              </div>
+              <div>
+                <label for="family-children" class="block text-caption font-mono text-wada-paper/80 uppercase mb-1.5 tracking-wider">Children</label>
+                <input type="text" id="family-children" placeholder="1 child" class="w-full bg-wada-ink/80 text-wada-paper border border-wada-moss/30 p-rhythm-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-wada-teal focus:border-transparent text-body font-body placeholder:text-wada-paper/45" />
               </div>
             </div>
+            <div>
+              <label for="family-ages" class="block text-caption font-mono text-wada-paper/80 uppercase mb-1.5 tracking-wider">Ages</label>
+              <input type="text" id="family-ages" placeholder="2, 5, 11" class="w-full bg-wada-ink/80 text-wada-paper border border-wada-moss/30 p-rhythm-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-wada-teal focus:border-transparent text-body font-body placeholder:text-wada-paper/45" />
+            </div>
             <button type="submit" class="w-full py-rhythm-2.5 bg-wada-rufous text-wada-paper font-semibold rounded-lg hover:bg-wada-teal transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] shadow-lg shadow-wada-rufous/10 hover:shadow-wada-teal/10 focus:ring-2 focus:ring-wada-teal focus:outline-none text-body font-display">
-              Notify Me / Đăng ký nhận tin
+              Tell me when it is ready
             </button>
           </form>
         </div>
-        <div class="pt-rhythm-3 border-t border-wada-moss/10 flex justify-between items-center text-caption text-wada-moss font-body">
+        <div class="pt-rhythm-3 border-t border-wada-moss/10 flex justify-between items-center text-caption text-wada-paper/70 font-body">
           <span>🔒 Privacy-First by Design</span>
           <span>No third-party trackers</span>
         </div>
@@ -47,20 +59,20 @@ const html = /* html */ `
           <h3 class="font-display text-display-h2 text-wada-paper font-bold mb-rhythm-3 leading-tight">
             For Makers
           </h3>
-          <p class="text-wada-moss text-body font-body mb-rhythm-8">
-            Build with us — the hardware and software are open. Read our docs and get started.
+          <p class="text-wada-paper/85 text-body font-body mb-rhythm-8">
+            Build with us. The hardware and software are open, and the build path is documented.
           </p>
           
           <div class="flex flex-col sm:flex-row gap-rhythm-3">
             <a href="https://github.com/campingas/tcube-landing" target="_blank" rel="noopener noreferrer" class="flex-1 text-center py-rhythm-2.5 bg-wada-slate border border-wada-moss/30 text-wada-paper font-semibold rounded-lg hover:border-wada-teal hover:text-wada-teal transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] focus:ring-2 focus:ring-wada-teal focus:outline-none text-body font-display">
               GitHub Repo
             </a>
-            <a href="/docs" class="flex-1 text-center py-rhythm-2.5 bg-wada-slate border border-wada-moss/30 text-wada-paper font-semibold rounded-lg hover:border-wada-teal hover:text-wada-teal transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] focus:ring-2 focus:ring-wada-teal focus:outline-none text-body font-display">
-              Documentation
+            <a href="#hardware" class="flex-1 text-center py-rhythm-2.5 bg-wada-slate border border-wada-moss/30 text-wada-paper font-semibold rounded-lg hover:border-wada-teal hover:text-wada-teal transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] focus:ring-2 focus:ring-wada-teal focus:outline-none text-body font-display">
+              Build Notes
             </a>
           </div>
         </div>
-        <div class="pt-rhythm-3 border-t border-wada-moss/10 flex justify-between items-center text-caption text-wada-moss font-mono">
+        <div class="pt-rhythm-3 border-t border-wada-moss/10 flex justify-between items-center text-caption text-wada-paper/70 font-mono">
           <span>MIT & CERN-OHL Licensed</span>
           <span class="text-wada-teal font-semibold">Join Core Orbit</span>
         </div>
