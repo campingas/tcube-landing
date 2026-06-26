@@ -38,19 +38,13 @@ T-Cube bridges educational tradition with modern hardware. Wada's palette lives 
 
 ### The T-Cube palette (7 tokens)
 
-Derived from Wada's catalogue. Combination reference: adapted from the light yellow, shell pink, green-blue, and warm coral families.
+Derived from Wada's catalogue. Combination reference: TODO
 
-Current direction: morning light. The page should feel like a warm table near a window: pale ground, tactile peach surfaces, one clear green-blue brand note, and cheerful coral interactions. This replaces the previous nocturnal green-black palette.
+Current direction: TODO
 
 | Token         | Wada # | Wada Name             | HEX       | Role                                         |
 | ------------- | ------ | --------------------- | --------- | -------------------------------------------- |
-| `wada-ink`    | #39    | Sulpher Yellow        | `#f5ecc2` | Default background — 60% of all surfaces     |
-| `wada-teal`   | #102   | Light Porcelain Green | `#00908a` | Brand primary, headings, logo mark           |
-| `wada-salmon` | #43    | Seashell Pink         | `#fdd4bd` | Warm support, cards, hardware illustration   |
-| `wada-rufous` | #7     | Fresh Color           | `#f6917e` | CTA buttons, accent, hover, hardware LED     |
-| `wada-paper`  | #159   | Black                 | `#111314` | Primary text on light morning surfaces       |
-| `wada-moss`   | #80    | Olive Green           | `#6b7140` | Secondary text, dividers, muted labels       |
-| `wada-slate`  | #42    | Ivory Buff            | `#ebd3a2` | Raised surface, footer, warm card background |
+TODO
 
 ---
 
@@ -72,13 +66,13 @@ In any section of the page, estimate the visual weight of each colour. If `wada-
 
 ### Usage rules
 
-- **Background**: `wada-ink` always. Never pure white — too blank and clinical.
-- **Primary text**: `wada-paper`. This is the only intentionally dark token in the palette; use it for body copy and button text.
-- **Secondary text / labels / captions**: `wada-moss`. Use at ≥18px regular or ≥14px bold. For tiny labels, prefer `wada-paper` with opacity.
-- **CTA buttons**: `wada-rufous` background, `wada-paper` text. On hover: shift to `wada-teal` only where the text remains readable.
-- **Cards and raised surfaces**: `wada-slate` or `wada-salmon` over `wada-ink`; these create warmth without returning to dark panels.
-- **Hardware illustrations**: `wada-salmon` dominant fill, `wada-rufous` accent detail, `wada-teal` signal detail. The Raspberry Pi and T-Cube enclosure should feel warm and tactile — not a glossy product render.
-- **Never** place `wada-teal` and `wada-rufous` side by side at equal weight. They compete. One dominates, the other accents.
+- **Background**: 
+- **Primary text**: 
+- **Secondary text / labels / captions**: 
+- **CTA buttons**: 
+- **Cards and raised surfaces**: 
+- **Hardware illustrations**: 
+- **Never**: 
 - **Never** introduce a hex value not in this table without adding it to the table first with a Wada reference or an explicit exception note.
 
 ---
@@ -87,15 +81,7 @@ In any section of the page, estimate the visual weight of each colour. If `wada-
 
 | Pair                          | Ratio   | Level    | Notes                           |
 | ----------------------------- | ------- | -------- | ------------------------------- |
-| `wada-paper` on `wada-ink`    | ~15.7:1 | AAA      | Body text — safe at all sizes   |
-| `wada-paper` on `wada-slate`  | ~12.8:1 | AAA      | Cards — fully safe              |
-| `wada-paper` on `wada-salmon` | ~13.6:1 | AAA      | Warm cards — fully safe         |
-| `wada-paper` on `wada-rufous` | ~8.2:1  | AAA      | CTA button text — safe          |
-| `wada-paper` on `wada-teal`   | ~4.8:1  | AA       | Hover button text — safe        |
-| `wada-teal` on `wada-ink`     | ~3.3:1  | AA large | Headings and large accents only |
-| `wada-moss` on `wada-ink`     | ~4.4:1  | AA large | Secondary copy and labels       |
-
-Do not use `wada-teal`, `wada-rufous`, or `wada-moss` as small body copy on `wada-ink`. If text is below 18px, use `wada-paper` and adjust opacity for hierarchy.
+TODO
 
 ---
 
@@ -189,15 +175,11 @@ T-Cube uses three typeface roles. These are current defaults — subject to chan
 
 | Role           | Family         | Use                                 |
 | -------------- | -------------- | ----------------------------------- |
-| `font-display` | Space Grotesk  | Headings, hero text, brand mark     |
-| `font-body`    | Inter          | Body copy, UI labels, navigation    |
-| `font-mono`    | JetBrains Mono | Code samples, technical annotations |
-
-**Note on Space Grotesk:** geometric, slightly warm, works well in both Vietnamese and Latin characters. If a Vietnamese-specific display face is introduced later, it replaces Space Grotesk in `font-display` only.
+TODO
 
 ---
 
-## 3. Voice — Confident, Warm, Cheerful, Legible
+## 3. Text/Voice — Confident, Warm, Cheerful, Legible
 
 T-Cube speaks the way a great teacher does: they know exactly what they're talking about, they care deeply that you understand it, and they make the subject feel like the most natural thing in the world.
 
@@ -246,15 +228,15 @@ These four words are not adjectives for the brand — they are functional constr
 | "Our platform leverages AI-powered TTS"    | "T-Cube reads short English sentences aloud."                  | Name the action, name the language   |
 | "Designed with educational best practices" | "Built the way good teachers teach."                           | Human analogy, not methodology-speak |
 | "Easy-to-use interface"                    | "Press play. That's it."                                       | Show the simplicity, don't claim it  |
-| "Seamless multilingual support"            | "English first. European languages next. Asian languages too." | Sequence and specificity             |
+| "Seamless multilingual support"            | "English on default." | Sequence and specificity             |
 | "Empowering the next generation"           | "Your child learns by listening."                              | Direct, true, human                  |
 | "Users can access content via the device"  | "Pick it up. Press the button."                                | Instructions, not documentation      |
 
 ---
 
-### Language priority
+### Language
 
-English is the primary language and the first content library. European languages come next, followed by Asian languages. Vietnamese is part of the Asian-language roadmap, not the first launch promise. Rules:
+English is the default language and the first content library.
 
 - Bilingual labels are acceptable only when a section is explicitly about a specific language (`Listen / Écouter`).
 - Bilingual sentences are not (`"T-Cube giúp children học ngôn ngữ mới"`).
@@ -274,7 +256,7 @@ The landing page hero section must communicate the same answer. If the section a
 
 **Canonical answer:**
 
-> T-Cube is a small device that reads short English sentences aloud to children first — then European and Asian languages — so they learn by listening.
+> T-Cube is a small, solid cube — soft at the edges, satisfying to hold. Five of its faces carry tactile, luminous buttons. Each button plays a sound: recorded by a parent, uploaded from a library, or generated by AI. The default voice speaks English, but any language, any accent can be set — French, Spanish, Mandarin, whatever the family speaks at home or needs at school. Press a button, hear a word, hear a story, hear a lesson. That is the entire interaction — and behind it, an invisible curriculum built on how children actually learn. No screen, no menu, no account to log in to. Just a child's hand and a sound that plays.
 
 ---
 
@@ -368,58 +350,8 @@ What remains is the page.
 
 For use when writing template strings, reviewing PRs, or checking designs.
 
-```
-COLOURS  (all wada-* in Tailwind)
-  wada-ink     #f5ecc2   morning background, 60% of surfaces
-  wada-teal    #00908a   brand primary, headings, logo
-  wada-salmon  #fdd4bd   warm support, cards, hardware
-  wada-rufous  #f6917e   CTA buttons, accent, LED
-  wada-paper   #111314   primary text on light surfaces
-  wada-moss    #6b7140   secondary text, dividers
-  wada-slate   #ebd3a2   raised surface, footer
-
-OBJECT SCALE  (φ = 1.618, seed 24px)
-  stamp   24px   icon, avatar
-  chip    39px   badge, tag
-  tile    63px   feature icon
-  block   102px  section visual
-  hero    164px  primary illustration
-  god     328px  landing signature (hero × 2, reserved)
-
-TYPE SCALE  (φ, seed 16px)
-  caption  10px    footnote, legal
-  body     16px    paragraph, UI label
-  lead     26px    card body, intro
-  h3       42px    subheading
-  h2       68px    section heading
-  h1       110px   hero headline (clamp on mobile)
-
-SPACING  (Fibonacci-φ, seed 8px)
-  rhythm-1   8px    tight inline
-  rhythm-2   13px   component inner padding
-  rhythm-3   21px   card padding
-  rhythm-5   34px   between elements
-  rhythm-8   55px   section inner padding
-  rhythm-13  89px   between sections
-  rhythm-21  144px  hero breathing room
-
-VOICE
-  Confident · Warm · Cheerful · Legible
-  Active voice. Short sentences. English-first.
-  No hedges. No jargon. One idea per sentence.
-
-JOBS CHECKLIST  (before every merge to main)
-  □ 10-foot test      most important thing reads instantly?
-  □ Remove one        does removing an element improve it?
-  □ Stranger test     5 sec, "what does this do?"
-  □ Product match     hero communicates the canonical sentence?
-  □ Speed check       LCP < 4s on 3G throttle?
-  □ CTA path          every section points forward?
-  □ Red-pen pass      nothing left that could be cut?
-```
+TODO
 
 ---
 
 _Colour references verifiable at [wscolors.com](https://wscolors.com) (Wada Sanzo digital catalogue). Scale formula: φ = 1.618, object seed = 24px, type seed = 16px, spacing seed = 8px, divine leap god = hero × 2._
-
-Version note 2026-06-24: palette shifted to a warmer, lighter morning-light set pulled from the softer end of the Wada catalogue.
