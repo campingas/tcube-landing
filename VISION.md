@@ -84,7 +84,7 @@ These are the six things a visitor must be able to say after leaving the page. N
 
 One headline. One subheadline. One visual. One CTA. Nothing else.
 
-The visual is the T-Cube device in a child's hands or on a child's shelf — not a render, not a diagram. The headline follows the canonical product sentence. The CTA points to either the build guide or a contact/interest form — whichever path is further along at launch.
+The visual is the T-Cube device in a child's hands or on a child's shelf — not a render, not a diagram. The headline follows the canonical product sentence. The CTA points to either the build guide or the feature-interest vote — whichever path is most useful at launch.
 
 The hero does not explain features. It creates enough curiosity and trust that a visitor scrolls.
 
@@ -161,19 +161,26 @@ The learning layer requires a Mac on the same home network running a TTS model a
 
 ---
 
-#### Join/Follow the T-Cube community + lead capture
+#### Join/Follow the T-Cube community + feature interest signal
 
-**Job:** convert interest into a relationship.
+**Job:** learn what families actually want next, without asking for personal data.
 
 A short closing section. Two paths, clearly separated:
 
-**For families:** a simple interest form. Email, city, number of children and ages. No more. Privacy-first framing — data is used only to notify when T-Cube is available in their region. RGPD-compliant by design: opt-in explicit, no third-party data sharing, analytics via a self-hosted or privacy-respecting tool (Plausible, Umami, or equivalent). No Google Analytics.
+**For families:** no lead capture in v1. No email. No city. No child ages. Instead, ask one product-direction question:
+
+> "For T-Cube, what would you use first?"
+> "Play languages, sounds, and music" or "Learning assistant."
+
+This vote tells the project what kind of AI families are curious about: playful audio generation and multilingual sound packs, or a more structured tutor that manages learning progression. The landing page shows the result after voting. In the static v1 site, results may be local/session-level until a privacy-respecting backend exists. Do not imply global product demand from local-only counts.
+
+If a visitor moves their cursor out through the top of the page and has not voted yet, show a small kawaii-style exit prompt: "Don't go before telling us this." It asks the same one-question poll and can be dismissed. It must not block navigation aggressively, request personal data, or feel like a growth-hack pop-up.
 
 **For makers and contributors:** a link to the GitHub organisation, the community forum or Discord, and the contribution guide.
 
 The CTA copy follows voice rules: specific and direct, not "Sign up for our newsletter".
 
-> "Tell us about your family — we'll let you know when T-Cube is ready near you."
+> "Vote for the feature you want first."
 > "Build with us — the hardware and software are open."
 
 ---
@@ -234,7 +241,7 @@ The learning science — spaced repetition, active recall, difficulty gradient, 
 ## What this page is not
 
 - **Not a documentation site.** The full build guide, API reference, hardware specs, and `learning.md` operating document live in the docs. The landing page links to them — it does not host them.
-- **Not a shop.** T-Cube is open hardware. The page does not sell a product. It converts interest into community membership and qualified leads.
+- **Not a shop.** T-Cube is open hardware. The page does not sell a product. It turns interest into a product-direction signal and a maker/community path.
 - **Not a startup pitch.** The language is warm and direct, not investor-facing. Avoid words like "scale", "traction", "market", "users".
 - **Not finished.** The landing page is a living document. As T-Cube reaches new communities, age groups, and countries, sections will be added and the copy will evolve. VISION.md evolves with it — update this file before changing the page's structure or primary message.
 
@@ -249,4 +256,4 @@ These are not implementation details — they are facts about the system that sh
 - **LLM stack:** Runs on a parent-owned Mac on the same Wi-Fi network. Not on the Pi. Not in the cloud. Two models: a TTS model (speech generation) and a general-purpose LLM (learning maintenance). Both are installed by the parent; neither is bundled with the device.
 - **`learning.md`:** The LLM's operating document. Ships with defaults. Parents edit it to reflect their child's age, grade, language goals, and pace. It is the instruction set that makes the LLM specific to this child.
 - **The curation loop:** Demand-triggered, not scheduled. Runs when content grows or when the parent/child requests a review. Output is an updated playlist pushed to the Pi and a statistics report for the parent.
-- **Privacy:** No data leaves the home network by default. No account required for the device. The interest form on the landing page is the only data collection point, and it is opt-in explicit.
+- **Privacy:** No data leaves the home network by default. No account required for the device. The v1 landing page does not collect family contact details; the feature poll should remain local/session-level unless a privacy-respecting backend is deliberately added.

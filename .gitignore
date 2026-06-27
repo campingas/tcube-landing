@@ -3,6 +3,8 @@ node_modules/
 .pnpm-store/
 
 # Build outputs
+output/
+build/
 dist/
 dist-ssr/
 *.local
