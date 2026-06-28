@@ -1,0 +1,39 @@
+{
+  "name": "tcube-landing",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.32.1",
+  "type": "module",
+  "scripts": {
+    "convex:deploy": "convex deploy",
+    "convex:dev": "convex dev",
+    "convex:typecheck": "convex typecheck",
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "deploy:vercel-build": "convex deploy --cmd-url-env-var-name VITE_CONVEX_URL --cmd 'pnpm build'",
+    "preview": "vite preview",
+    "format": "prettier --write src convex/*.ts convex/tsconfig.json index.html *.config.* package.json",
+    "format:check": "prettier --check src convex/*.ts convex/tsconfig.json index.html *.config.* package.json",
+    "lint": "eslint src --max-warnings 0",
+    "typecheck": "tsc --noEmit",
+    "verify": "pnpm format:check && pnpm typecheck && pnpm convex:typecheck && pnpm lint"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "@types/node": "^26.0.1",
+    "@types/three": "^0.185.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^9.1.0",
+    "postcss": "^8.4.49",
+    "prettier": "^3.4.2",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.20.0",
+    "vite": "^5.4.11"
+  },
+  "dependencies": {
+    "convex": "^1.42.0",
+    "three": "^0.185.0"
+  }
+}

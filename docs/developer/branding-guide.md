@@ -36,15 +36,32 @@ T-Cube bridges educational tradition with modern hardware. Wada's palette lives 
 
 ---
 
-### The T-Cube palette (7 tokens)
+### The T-Cube palette
 
-Derived from Wada's catalogue. Combination reference: TODO
+Current source: reconciled against the W.S. Colors public catalogue on 2026-06-27.
 
-Current direction: TODO
+Current direction: warm paper surface, deep ink text, and tactile button accents. The page should feel child-safe, handmade, serious, and open. It should not feel like a generic AI SaaS page.
 
-| Token         | Wada # | Wada Name             | HEX       | Role                                         |
-| ------------- | ------ | --------------------- | --------- | -------------------------------------------- |
-TODO
+Verification method: extracted all 159 colour cards from `https://wscolors.com/colors`, then compared the prototype hexes against catalogue hexes in CIE Lab distance. Where the nearest catalogue colour broke the intended warmth or role, the selected Wada colour is marked as a product-fit reconciliation rather than a strict nearest match.
+
+| Token       | Wada # | Wada name                 | Reconciled HEX | Prototype comment       | Role                                                                      |
+| ----------- | ------ | ------------------------- | -------------- | ----------------------- | ------------------------------------------------------------------------- |
+| `paper`     | 154    | White                     | `#ffffff`      | `/* proto #F7F4EF */`   | Main page background, light text on dark sections, primary light surface  |
+| `paperSoft` | 39     | Sulpher Yellow            | `#f5ecc2`      | `/* proto #EFEBE4 */`   | Alternate warm section background and soft card/icon surfaces             |
+| `ink`       | 159    | Black                     | `#111314`      | `/* proto #1C1A17 */`   | Primary text, dark sections, primary CTA background, cube faces           |
+| `inkMid`    | 158    | Slate Color               | `#34454c`      | `/* proto #4A4540 */`   | Body copy, secondary navigation text                                      |
+| `inkSoft`   | 157    | Warm Gray                 | `#a1a39a`      | `/* proto #8C867D */`   | Labels, captions, low-emphasis metadata                                   |
+| `coral`     | 19     | Etruscan Red              | `#c55347`      | `/* proto #D4614A */`   | Primary accent, hero emphasis, family CTA surface, first cube button      |
+| `teal`      | 102    | Light Porcelain Green     | `#00908a`      | `/* proto #3D8A85 */`   | Secondary accent, second cube button, learning/science cue                |
+| `amber`     | 70     | Khaki                     | `#bc892b`      | `/* proto #C8922A */`   | Tertiary accent, third cube button, warm learning cue                     |
+| `violet`    | 142    | Dark Soft Violet          | `#66629c`      | `/* proto #6B5B8C */`   | Older-child/teacher-mode accent, fourth cube button                       |
+| `sage`      | 99     | Pistachio Green           | `#648f7b`      | `/* proto #5A7A5E */`   | Open-hardware/trust accent, fifth cube button, low-key success indicator  |
+
+Selection notes:
+
+- `paper`: strict nearest Wada match is White. Keep the prototype parchment value as a comment until the implemented page is visually reviewed with the reconciled palette.
+- `paperSoft`: strict nearest match is also White. `Sulpher Yellow` is selected as the closest warm Wada surface that preserves the prototype's parchment intent.
+- `inkSoft`: `Andover Green` is the strict nearest match, but `Warm Gray` better preserves the low-emphasis neutral label role.
 
 ---
 
@@ -54,25 +71,26 @@ Wada presented colour combinations as swatch bars of different widths. The width
 
 | Weight | Role                                     | Tokens                      |
 | ------ | ---------------------------------------- | --------------------------- |
-| 60–70% | Dominant — backgrounds, large surfaces   | `wada-ink`                  |
-| 20–30% | Supporting — mid-weight elements         | `wada-slate`, `wada-salmon` |
-| 5–10%  | Accent — interactions, focus, highlights | `wada-rufous`               |
+| 60–70% | Dominant — backgrounds, large surfaces   | `paper`, `paperSoft`, `ink` |
+| 20–30% | Supporting — text and quiet structure    | `inkMid`, `inkSoft`         |
+| 5–10%  | Accent — interactions, buttons, signals  | `coral`, `teal`, `amber`, `violet`, `sage` |
 
-`wada-paper`, `wada-moss`, and `wada-teal` sit outside the surface rule when used as text colours.
+The accent colours should usually appear as button glows, small bars, labels, section emphasis, or one large CTA surface. They should not dominate whole page sections except for the family CTA card.
 
-In any section of the page, estimate the visual weight of each colour. If `wada-rufous` occupies more than 10% of the area, there is too much accent. Pull back.
+In any section of the page, estimate the visual weight of each colour. If a single accent colour occupies more than 10% of the area, there is too much accent. Pull back.
 
 ---
 
-### Usage rules
+### Usage Rules
 
-- **Background**: 
-- **Primary text**: 
-- **Secondary text / labels / captions**: 
-- **CTA buttons**: 
-- **Cards and raised surfaces**: 
-- **Hardware illustrations**: 
-- **Never**: 
+- **Background**: Use `paper` for the main page, `paperSoft` for alternate bands and raised quiet surfaces, and `ink` only for the learning layer and footer.
+- **Primary text**: Use `ink` on light surfaces and `paper` on dark surfaces.
+- **Secondary text / labels / captions**: Use `inkMid` for readable body support. Use `inkSoft` only for captions, labels, and metadata at `body` size or larger when contrast allows.
+- **CTA buttons**: Use `ink` with `paper` text for the default primary CTA. Use `coral` for hover states and the family capture card. Use white text on coral only for large text or non-critical short labels because contrast is below AA for normal body copy.
+- **Cards and raised surfaces**: Use `paper` on `paperSoft`, or `paperSoft` on `paper`. Separate cards with subtle ink borders around `rgba(28, 26, 23, 0.06–0.10)`.
+- **Hardware illustrations**: Use `ink` / Wada Black `#111314` for cube faces and the five accent colours for luminous buttons. Dark cube faces should have subtle layered gradients, fine texture, inset highlights, and a translucent `paper` border so the cube edges remain legible. Fill rounded cube-corner gaps with a dark shaded underlay so the page background never shows through the physical cube. Button colour should feel tactile and luminous, with glow and inner highlight effects, not flat neon.
+- **Dark sections**: Use `ink` background with `paper` headings and translucent `paper` text for secondary copy.
+- **Never**: Do not use pure black for text, saturated tech blue, purple-blue gradients, beige-only monochrome sections, or decorative gradient blobs.
 - **Never** introduce a hex value not in this table without adding it to the table first with a Wada reference or an explicit exception note.
 
 ---
@@ -81,7 +99,16 @@ In any section of the page, estimate the visual weight of each colour. If `wada-
 
 | Pair                          | Ratio   | Level    | Notes                           |
 | ----------------------------- | ------- | -------- | ------------------------------- |
-TODO
+| `ink` on `paper`              | 18.63   | AAA      | Primary body and heading pair   |
+| `inkMid` on `paper`           | 9.99    | AAA      | Secondary body copy             |
+| `inkSoft` on `paper`          | 2.55    | Fail     | Decorative/large metadata only  |
+| `paper` on `ink`              | 18.63   | AAA      | Dark-section headings/body      |
+| `paperSoft` on `ink`          | 15.67   | AAA      | Dark-section soft text          |
+| `paper` on `coral`            | 4.47    | Large AA | Borderline for normal text; use for CTA labels only |
+| `teal` on `paper`             | 3.92    | Large AA | Accent only, not body text      |
+| `amber` on `paper`            | 3.11    | Fail     | Accent only, never text         |
+| `violet` on `paper`           | 5.54    | AA       | Usable for normal text if needed |
+| `sage` on `paper`             | 3.65    | Large AA | Accent/large labels only        |
 
 ---
 
@@ -96,11 +123,11 @@ TODO
 
 ---
 
-## 2. Scale — Golden Ratio (φ = 1.618)
+## 2. Scale
 
 > "One word lands the target. No more 'bigger, too big, still too big'. Named scales mean a single word hits exactly."
 
-Three independent φ-ladders cover every sizing decision in the project. They share the same multiplier but have different seeds, because objects, type, and spacing are different things.
+The current prototype uses a pragmatic landing-page scale: a compact modular type ladder, generous section spacing, and soft tactile radii. The earlier golden-ratio direction remains useful for object-size naming, but implementation should follow the current prototype values unless the page is redesigned.
 
 ---
 
@@ -123,27 +150,31 @@ The `god` tier is reserved for the single most important visual on the page. Cur
 
 ---
 
-### 2b. Type scale (seed: 16px)
+### 2b. Type Scale
 
-Type lives on its own φ-ladder to keep reading sizes independent of object sizes.
+Prototype base: `17px` on the root element with a 1.2 modular ratio. This gives the page a quieter, editorial rhythm than the earlier φ type scale.
 
-| Token     | px  | rem   | Use                                                |
-| --------- | --- | ----- | -------------------------------------------------- |
-| `caption` | 10  | 0.625 | Legal, footnote, metadata                          |
-| `body`    | 16  | 1.0   | Paragraph, UI label — the reading baseline         |
-| `lead`    | 26  | 1.625 | Card body, intro paragraph, supporting copy        |
-| `h3`      | 42  | 2.625 | Section subheading                                 |
-| `h2`      | 68  | 4.25  | Section heading                                    |
-| `h1`      | 110 | 6.875 | Hero headline — always `clamp()`-limited on mobile |
+| Token    | rem     | Approx px at 17px root | Prototype var | Use                                      |
+| -------- | ------- | ---------------------- | ------------- | ---------------------------------------- |
+| `xs`     | 0.694   | 12                     | `--t-xs`      | Eyebrows, labels, metadata, privacy copy |
+| `sm`     | 0.833   | 14                     | `--t-sm`      | Card body, nav, form fields              |
+| `base`   | 1       | 17                     | `--t-base`    | Body baseline                            |
+| `md`     | 1.2     | 20                     | `--t-md`      | Hero subcopy, intro copy, compact h3     |
+| `lg`     | 1.44    | 24                     | `--t-lg`      | Logo, small section heading              |
+| `xl`     | 1.728   | 29                     | `--t-xl`      | Card headings, secondary visual type     |
+| `2xl`    | 2.074   | 35                     | `--t-2xl`     | Large supporting heading                 |
+| `3xl`    | 2.488   | 42                     | `--t-3xl`     | Section heading max and hero min         |
+| `4xl`    | 3.157   | 54                     | `--t-4xl`     | Reserved display step                    |
+| `5xl`    | 4.209   | 72                     | `--t-5xl`     | Hero headline max                        |
 
 `h1` and `h2` use fluid sizing to prevent layout breakage on small screens:
 
 ```css
 h1 {
-  font-size: clamp(2.5rem, 8vw, 6.875rem);
+  font-size: clamp(var(--t-3xl), 5vw, var(--t-5xl));
 }
 h2 {
-  font-size: clamp(1.75rem, 5vw, 4.25rem);
+  font-size: clamp(var(--t-xl), 3.5vw, var(--t-3xl));
 }
 ```
 
@@ -153,7 +184,7 @@ Never skip a level in the heading hierarchy for visual reasons — adjust weight
 
 ### 2c. Spacing scale (Fibonacci-φ, seed: 8px)
 
-Spacing and layout rhythm. Fibonacci values naturally converge with φ, so these feel inevitable.
+The prototype uses organic spacing values close to the Fibonacci rhythm, expressed in rems and clamps. Keep this rhythm when migrating to Tailwind tokens.
 
 | Token       | px  | Use                                     |
 | ----------- | --- | --------------------------------------- |
@@ -173,9 +204,42 @@ The token names (`rhythm-N`) follow the Fibonacci index, not the pixel value. Th
 
 T-Cube uses three typeface roles. These are current defaults — subject to change if a better pairing is found. Update this section and `tailwind.config.ts` in the same commit.
 
-| Role           | Family         | Use                                 |
-| -------------- | -------------- | ----------------------------------- |
-TODO
+| Role             | Family                                    | Use                                      |
+| ---------------- | ----------------------------------------- | ---------------------------------------- |
+| Body/UI          | `DM Sans`, `system-ui`, `sans-serif`      | Body copy, nav, labels, forms, CTAs      |
+| Display          | `DM Serif Display`, `serif`               | Logo, hero headline, section headings    |
+| Code/technical   | `SF Mono`, `Fira Mono`, `monospace`       | Inline code such as `learning.md`        |
+
+Display headings use tight line height and slight negative tracking in the prototype. Preserve the soft editorial quality, but avoid negative letter spacing where the implementation standard forbids it.
+
+---
+
+### 2e. Radius and Tactile Shape
+
+The prototype’s shape language is soft and tactile.
+
+| Token      | px   | Prototype var | Use                                      |
+| ---------- | ---- | ------------- | ---------------------------------------- |
+| `radius`   | 12   | `--radius`    | Pills, science cards, maker links        |
+| `radiusLg` | 24   | `--radius-lg` | Card groups, section panels, BOM card    |
+| `cubeFace` | 28   | direct value  | Cube faces only                          |
+| `pill`     | 999  | direct value  | CTAs and nav CTA                         |
+| `field`    | 8    | direct value  | Form inputs and small icon containers    |
+
+Cards should be soft but not toy-like. The cube can be rounder than the interface because it represents the physical product.
+
+---
+
+### 2f. Prototype Component Direction
+
+- **Navigation**: Fixed top nav, translucent `paper` background, blur, subtle lower border, serif logo with coral dot.
+- **Hero**: Two-column desktop layout with copy left and CSS cube right; mobile stacks cube above copy. The hero visual is the first-viewport product signal.
+- **Cube visual**: Lazy-loaded Three.js hero scene with a rounded black cube body, tactile dark material, soft lighting, point-lit button glow, and pointer/touch drag rotation. Each non-bottom face has exactly one centered glowing button. The bottom face is blank. Keep Three out of the initial bundle through dynamic import unless the performance budget is revised.
+- **Age cards**: Three-column split panel on desktop, one column on mobile, separated by thin ink dividers and small accent bars.
+- **Learning layer**: Full dark `ink` section with three mode cards and a horizontal curation loop that stacks on mobile.
+- **Build section**: `paperSoft` background with text and BOM card. Technical language is acceptable here.
+- **Community section**: Split path: coral family feature poll with local results, quiet maker card with links. The poll asks what feature families want first and must not request personal contact details in v1.
+- **Footer**: Dark `ink` footer with low-contrast metadata and coral logo dot.
 
 ---
 
@@ -350,8 +414,23 @@ What remains is the page.
 
 For use when writing template strings, reviewing PRs, or checking designs.
 
-TODO
+- Use `paper` / `paperSoft` for warm light surfaces and `ink` for text or dark sections.
+- Use `coral` as the primary accent and family CTA colour; use `teal`, `amber`, `violet`, and `sage` as small signal colours.
+- Do not use `amber`, `teal`, `sage`, `inkSoft`, or white-on-coral for long normal-size body text.
+- Body/UI font is `DM Sans`; display font is `DM Serif Display`; technical inline code uses a monospace stack.
+- Root font size is `17px`; type follows the prototype’s 1.2 modular scale from `xs` through `5xl`.
+- CTAs are pill-shaped; cards use `radiusLg`; the physical cube can be softer and rounder than interface cards.
+- Cube faces use Wada Black `#111314`, not `paperSoft`; each non-bottom face has one centered button and the bottom face has none.
+- Hero layout must show the product signal in the first viewport: copy plus animated/tactile cube.
+- Keep copy warm, direct, and concrete. Do not write generic AI-platform language.
+- Preserve the static-page constraint unless architecture changes are documented first.
 
 ---
 
-_Colour references verifiable at [wscolors.com](https://wscolors.com) (Wada Sanzo digital catalogue). Scale formula: φ = 1.618, object seed = 24px, type seed = 16px, spacing seed = 8px, divine leap god = hero × 2._
+_Current palette source: reconciled Wada catalogue tokens, with prototype hex values retained as comments in the palette table. Object scale keeps the φ naming ladder; type follows the current prototype’s 1.2 modular scale._
+
+## Version Notes
+
+- 2026-06-27: Exported current visual design inputs from `tcube-landing.html` into this guide: palette, contrast notes, type pairing, modular type scale, radii, component direction, and quick reference card.
+- 2026-06-27: Reconciled prototype colours against W.S. Colors catalogue entries and retained prototype hex values as comments beside each Wada-backed token.
+- 2026-06-27: Replaced CSS hero cube direction with a lazy-loaded interactive Three.js scene using rounded geometry, tactile dark material, soft lights, glowing button meshes, and pointer drag rotation.

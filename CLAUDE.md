@@ -12,6 +12,7 @@ Read `AGENTS.md` for all repo-wide instructions.
 - Prefer using repo scripts and documented workflows over ad-hoc commands
 - Keep Claude-specific notes minimal in this file
 - Do not duplicate rules that already exist in `AGENTS.md`
+- Do not write content with `—` dash or em dash in punctuation.
 
 ## Optional Local File
 
