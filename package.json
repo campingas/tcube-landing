@@ -12,8 +12,8 @@
     "build": "tsc --noEmit && vite build",
     "deploy:vercel-build": "convex deploy --cmd-url-env-var-name VITE_CONVEX_URL --cmd 'pnpm build'",
     "preview": "vite preview",
-    "format": "prettier --write src convex index.html *.config.* package.json",
-    "format:check": "prettier --check src convex index.html *.config.* package.json",
+    "format": "prettier --write src convex/*.ts convex/tsconfig.json index.html *.config.* package.json",
+    "format:check": "prettier --check src convex/*.ts convex/tsconfig.json index.html *.config.* package.json",
     "lint": "eslint src --max-warnings 0",
     "typecheck": "tsc --noEmit",
     "verify": "pnpm format:check && pnpm typecheck && pnpm convex:typecheck && pnpm lint"
