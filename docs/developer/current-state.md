@@ -10,7 +10,7 @@ The migrated app uses `index.html` as the semantic shell, `src/main.ts` as the m
 
 The build/install path now stays inside the landing page as a large right-side drawer mounted by `src/sections/build-drawer.ts`. It summarizes the assembly notes, product characteristics, and firmware release path without introducing a second page to maintain. A separate LLM operators drawer mounted by `src/sections/llm-drawer.ts` explains the speech generation and learning-loop material and links to `learning.md`.
 
-The visual direction from `tcube-landing.html` is preserved structurally: DM Sans body type, DM Serif Display headings, rounded tactile surfaces, split hero with interactive cube, age cards, dark learning layer, build section, and community cards. The implementation uses the Wada-reconciled palette from `docs/developer/branding-guide.md`, with prototype hexes retained in `tailwind.config.ts` comments. The hero cube is now a lazy-loaded Three.js scene with a rounded Wada Black `#111314` body, one centered glowing button on each non-bottom face, no button on the bottom face, soft lighting, and pointer/touch drag rotation. Vite emits the cube code separately from a named `three` vendor chunk so the app code and the 3D dependency can be reviewed independently.
+The visual direction from `tcube-landing.html` is preserved structurally: DM Sans body type, DM Serif Display headings, rounded tactile surfaces, split hero with interactive cube, age cards, learning layer, build section, and community cards. The implementation uses the Wada-reconciled palette from `docs/developer/branding-guide.md`, with prototype hexes retained in `tailwind.config.ts` comments. The app now supports light and dark mode through CSS-variable-backed Wada tokens and a nav toggle; first visit follows OS preference until the visitor chooses a mode. The hero cube is a lazy-loaded Three.js scene with a rounded theme-aware body: Wada Black `#111314` in light mode and Wada White `#ffffff` with light shading in dark mode. It keeps one centered glowing button on each non-bottom face, no button on the bottom face, soft lighting, and pointer/touch drag rotation. Vite emits the cube code separately from a named `three` vendor chunk so the app code and the 3D dependency can be reviewed independently.
 
 The current copy is not final. Several wording choices are intentionally pending review, especially where the page explains age ranges, the learning layer, future modes, and community calls to action.
 
@@ -46,7 +46,7 @@ Do not create a second source of truth for colours or typography. If `DESIGN.md`
 
 ## Important Assumptions
 
-The current `tcube-landing.html` style and colour direction should be preserved while copy is revised.
+The current `tcube-landing.html` style and colour direction is preserved as the light theme while copy is revised.
 
 The landing page remains static-first: no auth and no committed secrets. Convex is used only for aggregate live poll counts.
 
@@ -60,9 +60,11 @@ Hardware claims in public copy need validation before launch.
 
 The migrated community section no longer collects email, city, or child ages. It now uses a Convex-backed feature-interest poll when `VITE_CONVEX_URL` is configured, with a localStorage fallback when Convex is absent or unavailable. `localStorage` still stores the device-level vote/dismissal state. The exit-intent prompt is armed only after the visitor first moves inside the page, and dismissal through the close button or Escape key is stored so people can decline without being asked again on that device.
 
-Some documentation placeholders remain outside the branding-guide export, including the missing developer README and root README placeholder.
+Some wording and product-validation placeholders remain outside the branding-guide export, especially around final landing-page copy and hardware claims.
 
-Automated validation passed after the migration, Three.js cube update, exit-vote dismissal fix, poll-card design update, Build drawer change, LLM drawer split, README updates, and Convex/Vercel deployment setup: `pnpm verify` and `pnpm build`.
+Automated validation passed after the migration, Three.js cube update, exit-vote dismissal fix, poll-card design update, Build drawer change, LLM drawer split, README updates, Convex/Vercel deployment setup, and dark-mode implementation: `pnpm verify` and `pnpm build`.
+
+Browser verification for the dark-mode cube update passed with Playwright Chromium: desktop light cube average framebuffer brightness 52, desktop dark cube average brightness 212, and mobile dark cube average brightness 211. Screenshots are in `output/playwright/theme-light-desktop.png`, `output/playwright/theme-dark-desktop.png`, and `output/playwright/theme-dark-mobile.png`.
 
 Browser verification for the hero cube passed with Playwright Chromium on desktop `1440x1000` and mobile `390x844`: canvas was nonblank, pixel-diverse, and changed after drag interaction. Screenshots and pixel-check JSON are in `output/playwright/`.
 

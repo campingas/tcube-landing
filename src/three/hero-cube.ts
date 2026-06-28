@@ -22,6 +22,7 @@ import {
 } from 'three'
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js'
 
+import { currentTheme, THEME_CHANGE_EVENT, type Theme } from '@/theme'
 import { qs } from '@/utils/dom'
 
 interface FaceSpec {
@@ -34,6 +35,40 @@ interface FaceSpec {
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const CUBE_SIZE = 2.1
 const HALF = CUBE_SIZE / 2
+
+interface CubeTheme {
+  clearcoat: number
+  color: string
+  gradient: [string, string, string]
+  grain: [number, number]
+  grainAlpha: number
+  line: string
+  lineAlpha: number
+  roughness: number
+}
+
+const cubeThemes: Record<Theme, CubeTheme> = {
+  light: {
+    clearcoat: 0.42,
+    color: '#111314',
+    gradient: ['#25282a', '#111314', '#050607'],
+    grain: [110, 90],
+    grainAlpha: 0.16,
+    line: '#ffffff',
+    lineAlpha: 0.12,
+    roughness: 0.68,
+  },
+  dark: {
+    clearcoat: 0.58,
+    color: '#ffffff',
+    gradient: ['#ffffff', '#f5ecc2', '#a1a39a'],
+    grain: [54, 64],
+    grainAlpha: 0.1,
+    line: '#111314',
+    lineAlpha: 0.08,
+    roughness: 0.48,
+  },
+}
 
 const faceSpecs: FaceSpec[] = [
   {
@@ -68,7 +103,8 @@ const faceSpecs: FaceSpec[] = [
   },
 ]
 
-function createTexture(): CanvasTexture {
+function createTexture(theme: Theme): CanvasTexture {
+  const cubeTheme = cubeThemes[theme]
   const size = 256
   const canvas = document.createElement('canvas')
   canvas.width = size
@@ -80,23 +116,25 @@ function createTexture(): CanvasTexture {
   }
 
   const gradient = context.createLinearGradient(0, 0, size, size)
-  gradient.addColorStop(0, '#25282a')
-  gradient.addColorStop(0.48, '#111314')
-  gradient.addColorStop(1, '#050607')
+  gradient.addColorStop(0, cubeTheme.gradient[0])
+  gradient.addColorStop(0.48, cubeTheme.gradient[1])
+  gradient.addColorStop(1, cubeTheme.gradient[2])
   context.fillStyle = gradient
   context.fillRect(0, 0, size, size)
 
-  context.globalAlpha = 0.16
+  context.globalAlpha = cubeTheme.grainAlpha
   for (let i = 0; i < 520; i += 1) {
     const x = Math.random() * size
     const y = Math.random() * size
-    const value = String(Math.round(110 + Math.random() * 90))
+    const value = String(
+      Math.round(cubeTheme.grain[0] + Math.random() * cubeTheme.grain[1]),
+    )
     context.fillStyle = `rgb(${value} ${value} ${value})`
     context.fillRect(x, y, 1, 1)
   }
 
-  context.globalAlpha = 0.12
-  context.strokeStyle = '#ffffff'
+  context.globalAlpha = cubeTheme.lineAlpha
+  context.strokeStyle = cubeTheme.line
   for (let line = -size; line < size * 2; line += 14) {
     context.beginPath()
     context.moveTo(line, 0)
@@ -110,16 +148,29 @@ function createTexture(): CanvasTexture {
   return texture
 }
 
-function roundedBox(): Group {
+function applyCubeTheme(material: MeshPhysicalMaterial, theme: Theme): void {
+  const cubeTheme = cubeThemes[theme]
+  material.map?.dispose()
+  material.clearcoat = cubeTheme.clearcoat
+  material.color.set(cubeTheme.color)
+  material.map = createTexture(theme)
+  material.roughness = cubeTheme.roughness
+  material.needsUpdate = true
+}
+
+function roundedBox(theme: Theme): {
+  group: Group
+  material: MeshPhysicalMaterial
+} {
   const group = new Group()
-  const texture = createTexture()
+  const cubeTheme = cubeThemes[theme]
   const faceMaterial = new MeshPhysicalMaterial({
-    clearcoat: 0.42,
+    clearcoat: cubeTheme.clearcoat,
     clearcoatRoughness: 0.5,
-    color: '#111314',
-    map: texture,
+    color: cubeTheme.color,
+    map: createTexture(theme),
     metalness: 0.04,
-    roughness: 0.68,
+    roughness: cubeTheme.roughness,
   })
 
   const core = new Mesh(
@@ -131,7 +182,7 @@ function roundedBox(): Group {
   core.receiveShadow = true
   group.add(core)
 
-  return group
+  return { group, material: faceMaterial }
 }
 
 function createButton(spec: FaceSpec): Group {
@@ -229,7 +280,8 @@ export function initHeroCube(): void {
   const camera = new PerspectiveCamera(34, 1, 0.1, 100)
   camera.position.set(0, 0, 7)
 
-  const cube = roundedBox()
+  const cubeBody = roundedBox(currentTheme())
+  const cube = cubeBody.group
   cube.rotation.set(0.35, -0.55, 0.08)
   for (const spec of faceSpecs) {
     cube.add(createButton(spec))
@@ -298,6 +350,12 @@ export function initHeroCube(): void {
   })
 
   window.addEventListener('resize', resize)
+  window.addEventListener(THEME_CHANGE_EVENT, (event) => {
+    const detail: unknown = event instanceof CustomEvent ? event.detail : null
+    if (detail === 'light' || detail === 'dark') {
+      applyCubeTheme(cubeBody.material, detail)
+    }
+  })
   resize()
 
   renderer.setAnimationLoop(() => {

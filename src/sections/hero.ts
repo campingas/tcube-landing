@@ -23,7 +23,7 @@ const html = /* html */ `
       id="hero-cube-scene"
       class="cube-scene"
       role="img"
-      aria-label="A black tactile cube with five glowing buttons, one on each non-bottom face"
+      aria-label="A tactile cube with five glowing buttons, one on each non-bottom face"
     >
       <canvas id="hero-cube-canvas" class="cube-canvas"></canvas>
     </div>

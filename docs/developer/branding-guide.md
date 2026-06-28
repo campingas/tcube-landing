@@ -88,7 +88,8 @@ In any section of the page, estimate the visual weight of each colour. If a sing
 - **Secondary text / labels / captions**: Use `inkMid` for readable body support. Use `inkSoft` only for captions, labels, and metadata at `body` size or larger when contrast allows.
 - **CTA buttons**: Use `ink` with `paper` text for the default primary CTA. Use `coral` for hover states and the family capture card. Use white text on coral only for large text or non-critical short labels because contrast is below AA for normal body copy.
 - **Cards and raised surfaces**: Use `paper` on `paperSoft`, or `paperSoft` on `paper`. Separate cards with subtle ink borders around `rgba(28, 26, 23, 0.06–0.10)`.
-- **Hardware illustrations**: Use `ink` / Wada Black `#111314` for cube faces and the five accent colours for luminous buttons. Dark cube faces should have subtle layered gradients, fine texture, inset highlights, and a translucent `paper` border so the cube edges remain legible. Fill rounded cube-corner gaps with a dark shaded underlay so the page background never shows through the physical cube. Button colour should feel tactile and luminous, with glow and inner highlight effects, not flat neon.
+- **Hardware illustrations**: In light mode, use `ink` / Wada Black `#111314` for cube faces and the five accent colours for luminous buttons. In dark mode, the hero cube inverts to Wada White `#ffffff` with light warm-gray shading so the object stays visible against the dark page. Cube faces should have subtle layered gradients, fine texture, inset highlights, and enough edge contrast to remain legible. Button colour should feel tactile and luminous, with glow and inner highlight effects, not flat neon.
+- **Theme behavior**: The current page styling is the light theme. Dark mode uses `data-theme="dark"` and CSS-variable-backed `wada-*` tokens, follows OS preference until the visitor chooses a mode, and keeps accent colours stable.
 - **Dark sections**: Use `ink` background with `paper` headings and translucent `paper` text for secondary copy.
 - **Never**: Do not use pure black for text, saturated tech blue, purple-blue gradients, beige-only monochrome sections, or decorative gradient blobs.
 - **Never** introduce a hex value not in this table without adding it to the table first with a Wada reference or an explicit exception note.
@@ -234,7 +235,7 @@ Cards should be soft but not toy-like. The cube can be rounder than the interfac
 
 - **Navigation**: Fixed top nav, translucent `paper` background, blur, subtle lower border, serif logo with coral dot.
 - **Hero**: Two-column desktop layout with copy left and CSS cube right; mobile stacks cube above copy. The hero visual is the first-viewport product signal.
-- **Cube visual**: Lazy-loaded Three.js hero scene with a rounded black cube body, tactile dark material, soft lighting, point-lit button glow, and pointer/touch drag rotation. Each non-bottom face has exactly one centered glowing button. The bottom face is blank. Keep Three out of the initial bundle through dynamic import unless the performance budget is revised.
+- **Cube visual**: Lazy-loaded Three.js hero scene with a rounded cube body, theme-aware tactile material, soft lighting, point-lit button glow, and pointer/touch drag rotation. The cube is Wada Black in light mode and Wada White with light shaded texture in dark mode. Each non-bottom face has exactly one centered glowing button. The bottom face is blank. Keep Three out of the initial bundle through dynamic import unless the performance budget is revised.
 - **Age cards**: Three-column split panel on desktop, one column on mobile, separated by thin ink dividers and small accent bars.
 - **Learning layer**: Full dark `ink` section with three mode cards and a horizontal curation loop that stacks on mobile.
 - **Build section**: `paperSoft` background with text and BOM card. Technical language is acceptable here.
@@ -420,7 +421,7 @@ For use when writing template strings, reviewing PRs, or checking designs.
 - Body/UI font is `DM Sans`; display font is `DM Serif Display`; technical inline code uses a monospace stack.
 - Root font size is `17px`; type follows the prototype’s 1.2 modular scale from `xs` through `5xl`.
 - CTAs are pill-shaped; cards use `radiusLg`; the physical cube can be softer and rounder than interface cards.
-- Cube faces use Wada Black `#111314`, not `paperSoft`; each non-bottom face has one centered button and the bottom face has none.
+- Cube faces use Wada Black `#111314` in light mode and Wada White `#ffffff` with light shading in dark mode; each non-bottom face has one centered button and the bottom face has none.
 - Hero layout must show the product signal in the first viewport: copy plus animated/tactile cube.
 - Keep copy warm, direct, and concrete. Do not write generic AI-platform language.
 - Preserve the static-page constraint unless architecture changes are documented first.
@@ -434,3 +435,4 @@ _Current palette source: reconciled Wada catalogue tokens, with prototype hex va
 - 2026-06-27: Exported current visual design inputs from `tcube-landing.html` into this guide: palette, contrast notes, type pairing, modular type scale, radii, component direction, and quick reference card.
 - 2026-06-27: Reconciled prototype colours against W.S. Colors catalogue entries and retained prototype hex values as comments beside each Wada-backed token.
 - 2026-06-27: Replaced CSS hero cube direction with a lazy-loaded interactive Three.js scene using rounded geometry, tactile dark material, soft lights, glowing button meshes, and pointer drag rotation.
+- 2026-06-28: Added light/dark theme guidance and updated the hero cube direction: black cube in light mode, white/light-shaded cube in dark mode, accent button glows unchanged.
