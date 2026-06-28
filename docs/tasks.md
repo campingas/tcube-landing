@@ -18,6 +18,7 @@
 - [x] Add Convex-backed live poll support with localStorage fallback.
 - [x] Add Vercel Git deployment setup, CI workflow, and environment template.
 - [x] Decide whether the lazy-loaded Three.js hero chunk size is acceptable for launch.
+- [x] Add light/dark theme support with a nav toggle and theme-aware Three.js cube material.
 
 ## Next
 
@@ -26,7 +27,7 @@
 - [x] Confirm the landing page CTA targets for build guide, GitHub, community, privacy, and feature poll; current links are placeholders.
 - [x] Confirm final GitHub/docs URLs used by the Build and LLM drawers.
 - [x] Decide whether the feature poll remains local-only for v1 or needs a privacy-respecting backend/service before launch.
-- [ ] Complete external Vercel and Convex dashboard setup for production deployment.
+- [x] Complete external Vercel and Convex dashboard setup for production deployment.
 - [x] Validate product and hardware claims against the latest hardware docs before shipping public copy.
 - [x] Replace or remove the standalone `tcube-landing.html` prototype once the migrated Vite page is approved.
 
@@ -35,4 +36,4 @@
 - [x] Run targeted validation after code changes.
 - [x] Run repo-level validation when the Vite project structure exists or after the static page is wired into the build.
 - [x] Perform desktop/mobile browser checks for the interactive hero cube.
-- [ ] Perform full manual responsive and accessibility checks against the testing guide before release.
+- [x] Perform full manual responsive and accessibility checks against the testing guide before release.

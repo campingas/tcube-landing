@@ -73,7 +73,7 @@ The Tailwind config is the **code representation** of the brand token system. Al
 
 - No raw hex values in HTML or TypeScript — all colours via `wada-*` tokens.
 - No arbitrary values (`text-[#abc]`, `mt-[37px]`) in production code.
-- Dark-first: `wada-ink` is the default background. No `dark:` variants needed in v1.
+- Theme support uses `data-theme="light|dark"` on `<html>` plus CSS-variable-backed `wada-*` tokens. The existing light theme is preserved; dark mode follows OS preference until the visitor uses the nav toggle.
 - No `@apply` except in `base.css`.
 - After adding a new directory or file extension, verify Tailwind JIT purge with `pnpm build`.
 

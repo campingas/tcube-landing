@@ -6,16 +6,16 @@ export default {
     extend: {
       colors: {
         wada: {
-          paper: '#ffffff', // proto #F7F4EF
-          paperSoft: '#f5ecc2', // proto #EFEBE4
-          ink: '#111314', // proto #1C1A17
-          inkMid: '#34454c', // proto #4A4540
-          inkSoft: '#a1a39a', // proto #8C867D
-          coral: '#c55347', // proto #D4614A
-          teal: '#00908a', // proto #3D8A85
-          amber: '#bc892b', // proto #C8922A
-          violet: '#66629c', // proto #6B5B8C
-          sage: '#648f7b', // proto #5A7A5E
+          paper: 'rgb(var(--wada-paper-rgb) / <alpha-value>)', // light #ffffff, proto #F7F4EF
+          paperSoft: 'rgb(var(--wada-paper-soft-rgb) / <alpha-value>)', // light #f5ecc2, proto #EFEBE4
+          ink: 'rgb(var(--wada-ink-rgb) / <alpha-value>)', // light #111314, proto #1C1A17
+          inkMid: 'rgb(var(--wada-ink-mid-rgb) / <alpha-value>)', // light #34454c, proto #4A4540
+          inkSoft: 'rgb(var(--wada-ink-soft-rgb) / <alpha-value>)', // light #a1a39a, proto #8C867D
+          coral: 'rgb(var(--wada-coral-rgb) / <alpha-value>)', // #c55347, proto #D4614A
+          teal: 'rgb(var(--wada-teal-rgb) / <alpha-value>)', // #00908a, proto #3D8A85
+          amber: 'rgb(var(--wada-amber-rgb) / <alpha-value>)', // #bc892b, proto #C8922A
+          violet: 'rgb(var(--wada-violet-rgb) / <alpha-value>)', // #66629c, proto #6B5B8C
+          sage: 'rgb(var(--wada-sage-rgb) / <alpha-value>)', // #648f7b, proto #5A7A5E
         },
       },
       fontFamily: {

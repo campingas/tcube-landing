@@ -16,6 +16,14 @@
   font-size: 17px;
 }
 
+:root[data-theme='dark'] {
+  --wada-paper-rgb: 17 19 20;
+  --wada-paper-soft-rgb: 52 69 76;
+  --wada-ink-rgb: 255 255 255;
+  --wada-ink-mid-rgb: 245 236 194;
+  --wada-ink-soft-rgb: 161 163 154;
+}
+
 @layer base {
   *,
   *::before,
@@ -73,12 +81,32 @@
     @apply flex list-none items-center gap-[2rem] p-0 max-[860px]:hidden;
   }
 
+  .nav-actions {
+    @apply flex items-center gap-[1rem];
+  }
+
   .nav-link {
     @apply text-sm font-medium text-wada-inkMid no-underline transition-colors hover:text-wada-ink focus:outline-none focus:ring-2 focus:ring-wada-coral focus:ring-offset-2 focus:ring-offset-wada-paper;
   }
 
   .nav-cta {
     @apply rounded-full bg-wada-ink px-[1.2rem] py-[0.5rem] text-wada-paper hover:bg-wada-coral hover:text-wada-paper;
+  }
+
+  .theme-toggle {
+    @apply relative flex h-[38px] w-[38px] items-center justify-center rounded-full border border-wada-ink/15 bg-wada-paperSoft text-wada-ink shadow-sm transition hover:-translate-y-px hover:border-wada-coral focus:outline-none focus:ring-2 focus:ring-wada-coral focus:ring-offset-2 focus:ring-offset-wada-paper;
+  }
+
+  .theme-toggle-icon {
+    @apply block h-[16px] w-[16px] rounded-full border border-current bg-current transition;
+    box-shadow: inset -5px -3px 0 rgb(var(--wada-paper-rgb));
+  }
+
+  .theme-toggle[data-theme-toggle-state='dark'] .theme-toggle-icon {
+    @apply bg-transparent;
+    box-shadow:
+      inset 5px -3px 0 rgb(var(--wada-ink-rgb)),
+      0 0 14px rgb(var(--wada-paper-soft-rgb) / 0.38);
   }
 
   .hero-section {
@@ -150,6 +178,11 @@
     background: rgb(var(--wada-ink-rgb) / 0.18);
     filter: blur(28px);
     transform: translateY(76%) scaleX(1.15);
+  }
+
+  :root[data-theme='dark'] .cube-scene::before {
+    background: rgb(255 255 255 / 0.28);
+    filter: blur(34px);
   }
 
   .cube {
