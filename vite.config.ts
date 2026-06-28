@@ -4,10 +4,17 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   build: {
+    chunkSizeWarningLimit: 550,
     rollupOptions: {
       input: {
-        build: fileURLToPath(new URL('./build/index.html', import.meta.url)),
         main: fileURLToPath(new URL('./index.html', import.meta.url)),
+      },
+      output: {
+        manualChunks(id) {
+          if (id.includes('/node_modules/three/')) {
+            return 'three'
+          }
+        },
       },
     },
     sourcemap: true,

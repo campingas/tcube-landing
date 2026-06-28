@@ -549,7 +549,16 @@
   }
 
   .build-actions {
-    @apply mt-[2rem];
+    @apply mt-[2rem] grid grid-cols-2 items-stretch gap-[1rem] max-[520px]:grid-cols-1;
+  }
+
+  .build-actions .button-primary,
+  .build-actions .button-ghost {
+    @apply justify-center text-center;
+  }
+
+  .build-firmware-cta {
+    @apply col-span-2 max-[520px]:col-span-1;
   }
 
   .bom-card {
@@ -623,21 +632,71 @@
     @apply grid gap-[0.8rem];
   }
 
+  .poll-options[hidden],
+  .poll-results[hidden] {
+    @apply hidden;
+  }
+
   .poll-option {
-    @apply flex cursor-pointer flex-col rounded-touch border border-wada-paper/30 bg-wada-paper/15 p-[1rem] text-left text-wada-paper transition hover:-translate-y-px hover:border-wada-paper/70 hover:bg-wada-paper/20 focus:outline-none focus:ring-2 focus:ring-wada-paper/70;
+    @apply relative flex cursor-pointer flex-col overflow-hidden rounded-touch border border-wada-paper/30 bg-wada-paper/15 p-[1.15rem] text-left text-wada-paper shadow-sm transition hover:-translate-y-px hover:border-wada-paper/70 hover:bg-wada-paper/20 focus:outline-none focus:ring-2 focus:ring-wada-paper/70;
+    min-height: 148px;
+  }
+
+  .poll-option::before {
+    @apply absolute inset-x-0 top-0 h-[5px] content-[''];
+    background: rgb(var(--wada-paper-rgb) / 0.45);
+  }
+
+  .poll-option::after {
+    @apply pointer-events-none absolute inset-0 content-[''];
+    background:
+      radial-gradient(
+        circle at 88% 16%,
+        rgb(var(--wada-paper-rgb) / 0.18),
+        transparent 30%
+      ),
+      linear-gradient(135deg, rgb(var(--wada-paper-rgb) / 0.1), transparent 44%);
+    opacity: 0;
+    transition: opacity 180ms ease;
+  }
+
+  .poll-option:hover::after,
+  .poll-option:focus-visible::after {
+    opacity: 1;
+  }
+
+  .poll-option[data-vote-choice='play']::before {
+    @apply bg-wada-amber;
+  }
+
+  .poll-option[data-vote-choice='assistant']::before {
+    @apply bg-wada-teal;
+  }
+
+  .poll-option-top {
+    @apply relative z-10 mb-[0.85rem] flex items-center gap-[0.7rem];
+  }
+
+  .poll-option-icon {
+    @apply flex h-[38px] w-[38px] flex-shrink-0 items-center justify-center rounded-full bg-wada-paper text-xs font-bold text-wada-coral shadow-sm;
+  }
+
+  .poll-option[data-vote-choice='assistant'] .poll-option-icon {
+    @apply text-wada-teal;
   }
 
   .poll-option-kicker {
-    @apply mb-[0.35rem] text-xs font-semibold uppercase text-wada-paper/60;
+    @apply text-xs font-semibold uppercase text-wada-paper/65;
     letter-spacing: 0.1em;
   }
 
   .poll-option strong {
-    @apply mb-[0.25rem] text-base text-wada-paper;
+    @apply relative z-10 mb-[0.35rem] text-base text-wada-paper;
+    line-height: 1.25;
   }
 
-  .poll-option span:last-child {
-    @apply text-sm text-wada-paper/70;
+  .poll-option-copy {
+    @apply relative z-10 text-sm text-wada-paper/75;
     line-height: 1.55;
   }
 
@@ -744,164 +803,218 @@
     @apply text-wada-paper/50 no-underline hover:text-wada-paper/80 focus:outline-none focus:ring-2 focus:ring-wada-coral focus:ring-offset-2 focus:ring-offset-wada-ink;
   }
 
-  .build-guide-section {
-    @apply bg-wada-paper pt-[9rem];
-  }
-
-  .build-guide-shell {
-    @apply space-y-[clamp(4rem,8vw,7rem)];
-  }
-
-  .build-guide-hero {
-    @apply max-w-[780px];
-  }
-
-  .build-guide-title {
-    @apply mb-[1.5rem] max-w-[11ch] font-display text-[clamp(theme(fontSize.3xl),6vw,theme(fontSize.5xl))] text-wada-ink;
-    line-height: 1.05;
-  }
-
-  .build-guide-lead {
-    @apply mb-[2rem] max-w-[58ch] text-md font-light text-wada-inkMid;
-    line-height: 1.65;
-  }
-
-  .build-guide-actions {
-    @apply flex flex-wrap gap-[1rem];
-  }
-
-  .build-guide-grid {
-    @apply grid grid-cols-2 items-stretch gap-[2rem] max-[860px]:grid-cols-1;
-  }
-
-  .guide-panel {
-    @apply flex h-full flex-col rounded-panel border border-wada-ink/10 bg-wada-paperSoft p-[2.5rem];
-  }
-
-  .guide-panel-dark {
-    @apply bg-wada-ink text-wada-paper;
-  }
-
   .guide-kicker {
     @apply mb-[1rem] block text-xs font-semibold uppercase text-wada-coral;
     letter-spacing: 0.12em;
-  }
-
-  .guide-panel-dark .guide-kicker {
-    @apply text-wada-paper/50;
-  }
-
-  .guide-panel h2,
-  .guide-steps h2,
-  .learning-install h2 {
-    @apply mb-[1.2rem] font-display text-2xl;
-    line-height: 1.15;
-  }
-
-  .guide-panel h2 {
-    @apply text-wada-ink;
-  }
-
-  .guide-panel-dark h2 {
-    @apply text-wada-paper;
-  }
-
-  .guide-panel p {
-    @apply text-sm text-wada-inkMid;
-    line-height: 1.75;
-  }
-
-  .guide-panel-dark p {
-    @apply text-wada-paper/70;
-  }
-
-  .guide-spec-list {
-    @apply mt-auto space-y-[1rem] pt-[2rem];
-  }
-
-  .guide-spec-list div {
-    @apply border-t border-wada-paper/10 pt-[1rem];
-  }
-
-  .guide-spec-list dt {
-    @apply text-xs font-semibold uppercase text-wada-paper/40;
-    letter-spacing: 0.1em;
-  }
-
-  .guide-spec-list dd {
-    @apply m-0 text-sm text-wada-paper/80;
-  }
-
-  .guide-bom {
-    @apply mt-[1rem] space-y-[0.75rem];
-  }
-
-  .guide-bom div {
-    @apply flex items-baseline justify-between gap-[1rem] border-b border-wada-ink/10 pb-[0.75rem] text-sm;
-  }
-
-  .guide-bom span {
-    @apply font-semibold text-wada-ink;
-  }
-
-  .guide-bom small {
-    @apply text-right text-xs text-wada-inkSoft;
   }
 
   .guide-link {
     @apply mt-auto inline-flex w-fit pt-[1.5rem] text-sm font-semibold text-wada-coral no-underline hover:text-wada-ink focus:outline-none focus:ring-2 focus:ring-wada-coral focus:ring-offset-2 focus:ring-offset-wada-paper;
   }
 
-  .guide-steps {
-    @apply rounded-panel bg-wada-paperSoft p-[2.5rem];
+  .has-side-drawer {
+    @apply overflow-hidden;
   }
 
-  .step-list {
-    @apply mb-[2rem] grid grid-cols-3 gap-px overflow-hidden rounded-touch bg-wada-ink/10 max-[960px]:grid-cols-2 max-[640px]:grid-cols-1;
+  .build-drawer {
+    @apply fixed inset-0 z-[180];
   }
 
-  .step-list article {
-    @apply bg-wada-paper p-[1.5rem];
+  .build-drawer[hidden] {
+    @apply hidden;
   }
 
-  .step-list span {
-    @apply mb-[1rem] block text-xs font-semibold text-wada-coral;
-    letter-spacing: 0.12em;
+  .build-drawer-backdrop {
+    @apply absolute inset-0 cursor-default border-0 bg-wada-ink/35 p-0 backdrop-blur-sm;
   }
 
-  .step-list h3 {
-    @apply mb-[0.6rem] text-md font-semibold text-wada-ink;
+  .build-drawer-panel {
+    @apply absolute bottom-0 right-0 top-0 flex w-[min(760px,100vw)] flex-col gap-[2rem] overflow-y-auto bg-wada-paper px-[clamp(1.25rem,4vw,3rem)] py-[clamp(1.5rem,4vw,3rem)] shadow-2xl outline-none;
   }
 
-  .step-list p {
-    @apply m-0 text-sm text-wada-inkMid;
-    line-height: 1.65;
+  .build-drawer-header {
+    @apply relative border-b border-wada-ink/10 pb-[1.75rem] pr-[3rem];
   }
 
-  .learning-install {
-    @apply grid grid-cols-[0.8fr_1fr] gap-[3rem] rounded-panel border border-wada-ink/10 p-[2.5rem] max-[860px]:grid-cols-1;
+  .build-drawer-close {
+    @apply absolute right-0 top-0 flex h-[38px] w-[38px] items-center justify-center rounded-full border border-wada-ink/10 bg-wada-paperSoft text-xl leading-none text-wada-ink transition hover:bg-wada-ink hover:text-wada-paper focus:outline-none focus:ring-2 focus:ring-wada-coral;
   }
 
-  .learning-install-copy {
-    @apply space-y-[1rem] text-sm text-wada-inkMid;
+  .build-drawer-header h2 {
+    @apply mb-[1rem] max-w-[12ch] font-display text-[clamp(theme(fontSize.2xl),5vw,theme(fontSize.4xl))] text-wada-ink;
+    line-height: 1.08;
+  }
+
+  .build-drawer-header p {
+    @apply max-w-[58ch] text-sm text-wada-inkMid;
     line-height: 1.75;
   }
 
-  .learning-install code {
+  .build-drawer-actions {
+    @apply grid grid-cols-2 gap-[1rem] max-[560px]:grid-cols-1;
+  }
+
+  .build-drawer-actions .button-primary,
+  .build-drawer-actions .button-ghost {
+    @apply justify-center text-center;
+  }
+
+  .drawer-firmware-link {
+    @apply col-span-2 grid grid-cols-[auto_1fr] items-center gap-x-[1rem] rounded-touch bg-wada-ink p-[1.25rem] text-wada-paper no-underline transition hover:-translate-y-px hover:bg-wada-coral focus:outline-none focus:ring-2 focus:ring-wada-coral focus:ring-offset-2 focus:ring-offset-wada-paper max-[560px]:col-span-1;
+  }
+
+  .drawer-firmware-link > span {
+    @apply row-span-2 flex h-[44px] w-[44px] items-center justify-center rounded-full bg-wada-paper/15 text-xl font-semibold;
+  }
+
+  .drawer-firmware-link strong {
+    @apply block text-base;
+  }
+
+  .drawer-firmware-link small {
+    @apply block break-all text-xs text-wada-paper/55;
+  }
+
+  .drawer-panel-grid {
+    @apply grid grid-cols-2 gap-[1rem] max-[720px]:grid-cols-1;
+  }
+
+  .drawer-info-card {
+    @apply flex flex-col rounded-panel border border-wada-ink/10 bg-wada-paperSoft p-[1.5rem];
+  }
+
+  .drawer-info-card-dark {
+    @apply bg-wada-ink text-wada-paper;
+  }
+
+  .drawer-info-card-dark .guide-kicker {
+    @apply text-wada-paper/45;
+  }
+
+  .drawer-info-card h3,
+  .drawer-steps h3 {
+    @apply mb-[1rem] font-display text-xl;
+    line-height: 1.2;
+  }
+
+  .drawer-info-card h3 {
+    @apply text-wada-ink;
+  }
+
+  .drawer-info-card-dark h3 {
+    @apply text-wada-paper;
+  }
+
+  .drawer-info-card p {
+    @apply text-sm text-wada-inkMid;
+    line-height: 1.75;
+  }
+
+  .drawer-info-card-dark p {
+    @apply text-wada-paper/70;
+  }
+
+  .drawer-info-card dl {
+    @apply mt-auto space-y-[0.8rem] pt-[1.5rem];
+  }
+
+  .drawer-info-card dt {
+    @apply text-xs font-semibold uppercase text-wada-paper/40;
+    letter-spacing: 0.1em;
+  }
+
+  .drawer-info-card dd {
+    @apply m-0 text-sm text-wada-paper/80;
+  }
+
+  .drawer-bom {
+    @apply mt-[0.5rem] space-y-[0.7rem];
+  }
+
+  .drawer-bom div {
+    @apply flex items-baseline justify-between gap-[1rem] border-b border-wada-ink/10 pb-[0.7rem] text-sm;
+  }
+
+  .drawer-bom span {
+    @apply font-semibold text-wada-ink;
+  }
+
+  .drawer-bom small {
+    @apply text-right text-xs text-wada-inkSoft;
+  }
+
+  .drawer-steps {
+    @apply rounded-panel bg-wada-paperSoft p-[1.5rem];
+  }
+
+  .drawer-steps ol {
+    @apply grid list-none grid-cols-2 gap-px overflow-hidden rounded-touch bg-wada-ink/10 p-0 max-[640px]:grid-cols-1;
+    counter-reset: drawer-step;
+  }
+
+  .drawer-steps li {
+    @apply bg-wada-paper p-[1rem];
+    counter-increment: drawer-step;
+  }
+
+  .drawer-steps li::before {
+    @apply mb-[0.7rem] block text-xs font-semibold text-wada-coral;
+    content: counter(drawer-step, decimal-leading-zero);
+    letter-spacing: 0.12em;
+  }
+
+  .drawer-steps strong {
+    @apply mb-[0.25rem] block text-sm text-wada-ink;
+  }
+
+  .drawer-steps span {
+    @apply block text-xs text-wada-inkMid;
+    line-height: 1.55;
+  }
+
+  .drawer-learning-note {
+    @apply rounded-panel border border-wada-ink/10 p-[1.5rem];
+  }
+
+  .drawer-learning-note p {
+    @apply max-w-[58ch] text-sm text-wada-inkMid;
+    line-height: 1.75;
+  }
+
+  .drawer-learning-note code {
     @apply rounded bg-wada-ink/10 px-[0.4em] py-[0.1em] font-mono;
     font-size: 0.85em;
   }
 
-  .guide-warning {
-    @apply rounded-touch border border-wada-amber/40 bg-wada-amber/10 p-[1.5rem] text-sm text-wada-inkMid;
+  .drawer-operator-flow {
+    @apply rounded-panel bg-wada-paperSoft p-[1.5rem];
   }
 
-  .guide-warning strong {
-    @apply mb-[0.35rem] block text-wada-ink;
+  .drawer-operator-flow h3 {
+    @apply mb-[1rem] font-display text-xl text-wada-ink;
+    line-height: 1.2;
   }
 
-  .guide-warning p {
-    @apply m-0;
+  .operator-flow-grid {
+    @apply grid grid-cols-2 gap-px overflow-hidden rounded-touch bg-wada-ink/10 max-[640px]:grid-cols-1;
+  }
+
+  .operator-flow-grid div {
+    @apply bg-wada-paper p-[1rem];
+  }
+
+  .operator-flow-grid strong {
+    @apply mb-[0.35rem] block text-sm text-wada-ink;
+  }
+
+  .operator-flow-grid span {
+    @apply block text-xs text-wada-inkMid;
+    line-height: 1.55;
+  }
+
+  .operator-flow-grid code {
+    @apply rounded bg-wada-ink/10 px-[0.35em] py-[0.1em] font-mono;
+    font-size: 0.85em;
   }
 
   [data-reveal] {

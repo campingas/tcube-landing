@@ -1,7 +1,6 @@
 import { revealOnScroll } from '@/utils/intersection'
 import { mount } from '@/utils/dom'
 
-
 const html = /* html */ `
   <div class="hero-copy" data-reveal>
     <span class="hero-eyebrow">Screen-free &nbsp;·&nbsp; Any language &nbsp;·&nbsp; Any age</span>
@@ -15,7 +14,7 @@ const html = /* html */ `
     </p>
     <div class="hero-actions">
       <a href="#community" class="button-primary">Vote for the first feature →</a>
-      <a href="/build/" class="button-ghost">↗ Build one</a>
+      <a href="#build" class="button-ghost">↗ Build one</a>
     </div>
   </div>
 

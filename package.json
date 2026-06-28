@@ -2,16 +2,21 @@
   "name": "tcube-landing",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.32.1",
   "type": "module",
   "scripts": {
+    "convex:deploy": "convex deploy",
+    "convex:dev": "convex dev",
+    "convex:typecheck": "convex typecheck",
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
+    "deploy:vercel-build": "convex deploy --cmd-url-env-var-name VITE_CONVEX_URL --cmd 'pnpm build'",
     "preview": "vite preview",
-    "format": "prettier --write src index.html *.config.* package.json",
-    "format:check": "prettier --check src index.html *.config.* package.json",
+    "format": "prettier --write src convex index.html *.config.* package.json",
+    "format:check": "prettier --check src convex index.html *.config.* package.json",
     "lint": "eslint src --max-warnings 0",
     "typecheck": "tsc --noEmit",
-    "verify": "pnpm format:check && pnpm typecheck && pnpm lint"
+    "verify": "pnpm format:check && pnpm typecheck && pnpm convex:typecheck && pnpm lint"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
@@ -28,6 +33,7 @@
     "vite": "^5.4.11"
   },
   "dependencies": {
+    "convex": "^1.42.0",
     "three": "^0.185.0"
   }
 }

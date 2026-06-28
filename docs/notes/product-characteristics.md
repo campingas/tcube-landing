@@ -47,5 +47,18 @@
 
 ---
 
+## First Bench Prototype
+
+| Name | Short description |
+| --- | --- |
+| Raspberry Pi Zero 2 W Basic Kit | Main computer for running the device software and controlling connected hardware. |
+| MakerEdu MKE-M02 Button RGYBW Module | Development button for testing physical input through GPIO. |
+| MAX98357A I2S Class-D 3 W amplifier | Amplifies digital audio from the Raspberry Pi for the speaker. |
+| Mini 3 W 8-ohm speaker with enclosure | Plays speech, animal sounds, music, and device feedback. |
+| MPU6050 GY-521 6-DOF IMU | Detects movement, rotation, impact, and cube orientation. |
+| INMP441 I2S MEMS mic | Captures child voice for repeat-after-me and teacher mode — shares I2S bus with MAX98357A, full-duplex. |
+
+option: SPH0645, ReSpeaker 2-Mic HAT
+
 **Notes**  
 - All dimensions and specifications are subject to final engineering validation.

@@ -18,5 +18,11 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src", "vite.config.ts", "tailwind.config.ts", "eslint.config.js"]
+  "include": [
+    "src",
+    "convex",
+    "vite.config.ts",
+    "tailwind.config.ts",
+    "eslint.config.js"
+  ]
 }

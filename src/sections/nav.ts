@@ -5,7 +5,7 @@ const html = /* html */ `
   <ul class="nav-links">
     <li><a href="/#pitch" class="nav-link">For families</a></li>
     <li><a href="/#learning" class="nav-link">How it learns</a></li>
-    <li><a href="/build/" class="nav-link nav-cta">Build it</a></li>
+    <li><a href="#build-drawer" class="nav-link nav-cta" data-build-drawer-trigger>Build it</a></li>
   </ul>
 `
 

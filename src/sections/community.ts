@@ -1,3 +1,6 @@
+import { ConvexClient } from 'convex/browser'
+import { makeFunctionReference } from 'convex/server'
+
 import { qs, qsAll } from '@/utils/dom'
 import { revealOnScroll } from '@/utils/intersection'
 import { mount } from '@/utils/dom'
@@ -9,9 +12,19 @@ interface PollCounts {
   play: number
 }
 
+type EmptyArgs = Record<string, never>
+
 const VOTE_KEY = 'tcube_feature_vote'
 const COUNTS_KEY = 'tcube_feature_vote_counts'
 const EXIT_KEY = 'tcube_feature_vote_exit_dismissed'
+const getFeaturePoll = makeFunctionReference<'query', EmptyArgs, PollCounts>(
+  'polls:getFeaturePoll',
+)
+const submitFeatureVote = makeFunctionReference<
+  'mutation',
+  { choice: PollChoice },
+  PollCounts
+>('polls:submitFeatureVote')
 
 const initialCounts: PollCounts = {
   assistant: 0,
@@ -37,14 +50,24 @@ const html = /* html */ `
         <div class="feature-poll" data-poll>
           <div class="poll-options" data-poll-options>
             <button type="button" class="poll-option" data-vote-choice="play">
-              <span class="poll-option-kicker">Play first</span>
+              <span class="poll-option-top">
+                <span class="poll-option-icon" aria-hidden="true">Aa</span>
+                <span class="poll-option-kicker">Play first</span>
+              </span>
               <strong>Languages, sounds, and music</strong>
-              <span>Short phrases, animal sounds, songs, and voice packs for everyday listening.</span>
+              <span class="poll-option-copy">
+                Short phrases, animal sounds, songs, and voice packs for everyday listening.
+              </span>
             </button>
             <button type="button" class="poll-option" data-vote-choice="assistant">
-              <span class="poll-option-kicker">Learn first</span>
+              <span class="poll-option-top">
+                <span class="poll-option-icon" aria-hidden="true">AI</span>
+                <span class="poll-option-kicker">Learn first</span>
+              </span>
               <strong>Learning assistant</strong>
-              <span>Spaced practice, recall prompts, focus sessions, and guided progression.</span>
+              <span class="poll-option-copy">
+                Spaced practice, recall prompts, focus sessions, and guided progression.
+              </span>
             </button>
           </div>
 
@@ -64,7 +87,7 @@ const html = /* html */ `
               </div>
               <div class="poll-result-track"><span data-result-bar="assistant"></span></div>
             </div>
-            <p class="poll-note">Local browser result for now. No contact details collected.</p>
+            <p class="poll-note" data-poll-note>Local browser result for now. No contact details collected.</p>
           </div>
         </div>
       </div>
@@ -76,24 +99,24 @@ const html = /* html */ `
           a question, a pull request, or a fork — all welcome.
         </p>
         <div class="maker-links">
-          <a href="#" class="maker-link">
+          <a href="https://github.com/campingas/tcube-pi" class="maker-link" target="_blank" rel="noopener noreferrer">
             <div class="maker-link-icon" aria-hidden="true">⌥</div>
             <span class="maker-link-label">GitHub — hardware &amp; firmware</span>
             <span class="maker-link-arrow">→</span>
           </a>
-          <a href="/build/" class="maker-link">
+          <a href="#build-drawer" class="maker-link" data-build-drawer-trigger>
             <div class="maker-link-icon" aria-hidden="true">📐</div>
             <span class="maker-link-label">Build guide &amp; full documentation</span>
             <span class="maker-link-arrow">→</span>
           </a>
-          <a href="#" class="maker-link">
+          <a href="https://www.reddit.com/r/rasberrypi/" class="maker-link" target="_blank" rel="noopener noreferrer">
             <div class="maker-link-icon" aria-hidden="true">💬</div>
-            <span class="maker-link-label">Community forum &amp; Discord</span>
+            <span class="maker-link-label">Reddit — Raspberry Pi community</span>
             <span class="maker-link-arrow">→</span>
           </a>
-          <a href="#" class="maker-link">
+          <a href="#llm-drawer" class="maker-link" data-llm-drawer-trigger>
             <div class="maker-link-icon" aria-hidden="true">📄</div>
-            <span class="maker-link-label">learning.md — LLM operating document</span>
+            <span class="maker-link-label">LLM operators speach &amp; learn</span>
             <span class="maker-link-arrow">→</span>
           </a>
         </div>
@@ -169,6 +192,16 @@ function getVote(): PollChoice | null {
   return isPollChoice(vote) ? vote : null
 }
 
+function getConvexUrl(): string | null {
+  const url = import.meta.env.VITE_CONVEX_URL
+
+  if (typeof url !== 'string' || url.trim() === '') {
+    return null
+  }
+
+  return url
+}
+
 function setResultBar(choice: PollChoice, percent: number): void {
   qs<HTMLElement>(`[data-result-percent="${choice}"]`).textContent =
     `${String(percent)}%`
@@ -176,8 +209,10 @@ function setResultBar(choice: PollChoice, percent: number): void {
     `${String(percent)}%`
 }
 
-function renderResults(selected: PollChoice | null): void {
-  const counts = getCounts()
+function renderResults(
+  selected: PollChoice | null,
+  counts = getCounts(),
+): void {
   const total = counts.play + counts.assistant
   const playPercent = total === 0 ? 0 : Math.round((counts.play / total) * 100)
   const assistantPercent = total === 0 ? 0 : 100 - playPercent
@@ -198,39 +233,128 @@ function renderResults(selected: PollChoice | null): void {
   }
 }
 
-function closeExitVote(): void {
-  const exitVote = qs<HTMLElement>('[data-exit-vote]')
-  exitVote.hidden = true
-}
-
-function submitVote(choice: PollChoice): void {
-  if (getVote() !== null) {
-    closeExitVote()
-    return
-  }
-
+function saveLocalVote(choice: PollChoice): PollCounts {
   const counts = getCounts()
   counts[choice] += 1
   saveCounts(counts)
   window.localStorage.setItem(VOTE_KEY, choice)
   window.localStorage.setItem(EXIT_KEY, 'true')
-  renderResults(choice)
+
+  return counts
+}
+
+function setPollNote(text: string): void {
+  qs<HTMLElement>('[data-poll-note]').textContent = text
+}
+
+class FeaturePollClient {
+  private readonly client: ConvexClient
+  private counts: PollCounts = getCounts()
+  private unsubscribe: ReturnType<ConvexClient['onUpdate']> | null = null
+
+  constructor(url: string) {
+    this.client = new ConvexClient(url, {
+      unsavedChangesWarning: false,
+    })
+  }
+
+  subscribe(): void {
+    this.unsubscribe = this.client.onUpdate(
+      getFeaturePoll,
+      {},
+      (counts) => {
+        this.counts = counts
+        const existingVote = getVote()
+
+        if (existingVote !== null) {
+          renderResults(existingVote, counts)
+        }
+      },
+      () => {
+        setPollNote(
+          'Live results temporarily unavailable. Local browser result shown.',
+        )
+      },
+    )
+  }
+
+  async vote(choice: PollChoice): Promise<PollCounts> {
+    this.counts = await this.client.mutation(submitFeatureVote, { choice })
+
+    return this.counts
+  }
+
+  getCounts(): PollCounts {
+    return this.counts
+  }
+
+  close(): void {
+    this.unsubscribe?.unsubscribe()
+    void this.client.close()
+  }
+}
+
+function closeExitVote(): void {
+  const exitVote = qs<HTMLElement>('[data-exit-vote]')
+  exitVote.hidden = true
+}
+
+async function submitVote(
+  choice: PollChoice,
+  livePollClient: FeaturePollClient | null,
+): Promise<void> {
+  if (getVote() !== null) {
+    closeExitVote()
+    return
+  }
+
+  if (livePollClient !== null) {
+    try {
+      const counts = await livePollClient.vote(choice)
+      window.localStorage.setItem(VOTE_KEY, choice)
+      window.localStorage.setItem(EXIT_KEY, 'true')
+      renderResults(choice, counts)
+      closeExitVote()
+      return
+    } catch {
+      setPollNote(
+        'Live results temporarily unavailable. Local browser result shown.',
+      )
+    }
+  }
+
+  renderResults(choice, saveLocalVote(choice))
   closeExitVote()
 }
 
 function bindPoll(): void {
+  const convexUrl = getConvexUrl()
+  const livePollClient =
+    convexUrl === null ? null : new FeaturePollClient(convexUrl)
+
+  if (livePollClient !== null) {
+    setPollNote('Live project result. No contact details collected.')
+    livePollClient.subscribe()
+    window.addEventListener('pagehide', () => {
+      livePollClient.close()
+    })
+  }
+
   for (const button of qsAll<HTMLButtonElement>('[data-vote-choice]')) {
     button.addEventListener('click', () => {
       const choice = button.dataset.voteChoice ?? null
 
       if (isPollChoice(choice)) {
-        submitVote(choice)
+        void submitVote(choice, livePollClient)
       }
     })
   }
 
   const existingVote = getVote()
-  renderResults(existingVote)
+  renderResults(
+    existingVote,
+    livePollClient === null ? getCounts() : livePollClient.getCounts(),
+  )
 }
 
 function bindExitVote(): void {

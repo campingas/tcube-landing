@@ -9,7 +9,7 @@ This document owns: stack decisions, directory layout, TypeScript and Vite confi
 
 ## 1. Project Identity
 
-`tcube-landing` is the public entry-point for the T-Cube ecosystem (educational hardware + multilingual content platform). It is a **static site** — no server, no API, no auth. Its single job is to convert a visitor into a curious stakeholder: school decision-maker, parent, or content partner.
+`tcube-landing` is the public entry-point for the T-Cube ecosystem (educational hardware + multilingual content platform). It is a **static Vite site** with a minimal Convex backend for the live feature poll. Its single job is to convert a visitor into a curious stakeholder: school decision-maker, parent, or content partner.
 
 Every architectural decision should be filtered through: _does this make the page faster, clearer, or easier to maintain without adding runtime complexity?_
 
@@ -24,11 +24,12 @@ Every architectural decision should be filtered through: _does this make the pag
 | Styling         | Tailwind CSS   | `^3.x` JIT (not v4)        |
 | Linter          | ESLint         | `^9.x` flat config         |
 | Formatter       | Prettier       | `^3.x`                     |
+| Live data       | Convex         | feature poll only          |
 | Type check      | `tsc --noEmit` | part of CI                 |
 | Package manager | `pnpm`         | lockfile committed         |
 | Task runner     | `just`         | mirrors all tcube projects |
 
-No React, no Vue, no framework. Vanilla TypeScript + Tailwind. If interactivity grows beyond what vanilla can cleanly express, document the decision here before introducing anything.
+No React, no Vue, no framework. Vanilla TypeScript + Tailwind. Convex is used through its browser client, not React hooks. If interactivity grows beyond what vanilla can cleanly express, document the decision here before introducing anything.
 
 ---
 
@@ -50,6 +51,17 @@ No React, no Vue, no framework. Vanilla TypeScript + Tailwind. If interactivity 
 - `target: 'es2022'` — modern browsers only. T-Cube school partners use Chrome/Edge.
 - `sourcemap: true` in build — required for debugging Netlify/Vercel previews.
 - Never commit `.env.local`. Document all `VITE_`-prefixed vars in `src/env.d.ts` and `.env.example`.
+
+## 5.1 Convex Configuration
+
+Convex owns only the live feature poll in v1. It must not store personal data, child information, IP addresses, emails, or analytics identifiers.
+
+Rules:
+
+- Keep Convex functions in `convex/`.
+- Use `VITE_CONVEX_URL` as the only browser-facing Convex environment variable.
+- Keep `CONVEX_DEPLOY_KEY` out of Git and set it in Vercel.
+- The landing page must remain usable when `VITE_CONVEX_URL` is missing by falling back to local browser results.
 
 ---
 
@@ -197,6 +209,10 @@ document.addEventListener('DOMContentLoaded', () => {
 - Sections do not import from each other. Shared state goes in `src/store.ts`.
 - Use the `/* html */` comment tag on template strings for editor syntax highlighting.
 
+### Supporting Views
+
+Keep the landing page shell at `index.html`. For substantial supporting material that should not interrupt the landing-page flow, prefer an in-page drawer or modal section before adding a new page shell. Additional page shells are exceptions and must be documented in this guide before adding Vite entries.
+
 ---
 
 ## 14. Asset Handling
@@ -222,6 +238,8 @@ Vite hashes filenames automatically. Never hardcode hashed paths.
 | LCP                     | < 2.5 s on 4G |
 | CLS                     | < 0.1         |
 | Render-blocking scripts | zero          |
+
+The interactive hero cube is the only current exception path: Three.js is lazy-loaded after the landing page mounts and emitted as a separate `three` vendor chunk. Keep the main page JS under the budget above; review the Three chunk separately when changing the hero renderer.
 
 Run `just analyse` (with `rollup-plugin-visualizer`) before each release. If the bundle grows unexpectedly, find the cause before merging.
 
@@ -250,7 +268,7 @@ If a locale toggle is introduced: strings in `src/i18n/vi.ts` and `src/i18n/en.t
 
 `just verify` must pass at zero warnings. `just build` must exit 0. Both are required before any merge to `main`.
 
-Deployment: Vercel static export. Publish directory: `dist/`.
+Deployment: Vercel static export with Convex deployment during the Vercel build. Publish directory: `dist/`. See [`deployment-guide.md`](./deployment-guide.md).
 
 ---
 
@@ -258,7 +276,7 @@ Deployment: Vercel static export. Publish directory: `dist/`.
 
 - **Not a CMS** — copy lives in TypeScript template strings. If non-developer copy editing is needed, document the architecture change here first.
 - **Not an SPA** — no client-side routing. Additional pages get Vite entries, not a router.
-- **Not an API consumer** — no `fetch` in production. Contact forms go through Netlify Forms or Formspree.
+- **Not a general API consumer** — the only production backend integration in v1 is Convex for the live feature poll.
 - **Not a dependency accumulation point** — every `pnpm add` must be justified in the PR. Goal: zero runtime dependencies beyond Tailwind's output.
 
 ---

@@ -8,13 +8,15 @@ The original `tcube-landing.html` remains as an untracked standalone prototype r
 
 The migrated app uses `index.html` as the semantic shell, `src/main.ts` as the mount entry, `src/sections/*.ts` for section templates, `src/utils/dom.ts` and `src/utils/intersection.ts` for shared DOM/reveal behavior, and `src/styles/base.css` for Tailwind base/component styling.
 
-The project now also includes a dedicated Build one page at `build/index.html`, mounted by `src/build-page.ts` and rendered through `src/sections/build-guide.ts`. It summarizes the assembly notes, product characteristics, and learning-layer document without duplicating the full reference material.
+The build/install path now stays inside the landing page as a large right-side drawer mounted by `src/sections/build-drawer.ts`. It summarizes the assembly notes, product characteristics, and firmware release path without introducing a second page to maintain. A separate LLM operators drawer mounted by `src/sections/llm-drawer.ts` explains the speech generation and learning-loop material and links to `learning.md`.
 
-The visual direction from `tcube-landing.html` is preserved structurally: DM Sans body type, DM Serif Display headings, rounded tactile surfaces, split hero with interactive cube, age cards, dark learning layer, build section, and community cards. The implementation uses the Wada-reconciled palette from `docs/developer/branding-guide.md`, with prototype hexes retained in `tailwind.config.ts` comments. The hero cube is now a lazy-loaded Three.js scene with a rounded Wada Black `#111314` body, one centered glowing button on each non-bottom face, no button on the bottom face, soft lighting, and pointer/touch drag rotation.
+The visual direction from `tcube-landing.html` is preserved structurally: DM Sans body type, DM Serif Display headings, rounded tactile surfaces, split hero with interactive cube, age cards, dark learning layer, build section, and community cards. The implementation uses the Wada-reconciled palette from `docs/developer/branding-guide.md`, with prototype hexes retained in `tailwind.config.ts` comments. The hero cube is now a lazy-loaded Three.js scene with a rounded Wada Black `#111314` body, one centered glowing button on each non-bottom face, no button on the bottom face, soft lighting, and pointer/touch drag rotation. Vite emits the cube code separately from a named `three` vendor chunk so the app code and the 3D dependency can be reviewed independently.
 
 The current copy is not final. Several wording choices are intentionally pending review, especially where the page explains age ranges, the learning layer, future modes, and community calls to action.
 
 The documented target architecture is present: Vite 5, strict TypeScript, Tailwind 3, ESLint 9 flat config, Prettier 3, `pnpm`, and `just` task aliases.
+
+Deployment is now planned around Vercel Git integration plus Convex for the live feature poll. Convex stores aggregate poll counts only, and the landing page falls back to local browser results if `VITE_CONVEX_URL` is missing or unavailable.
 
 ## Documentation Status
 
@@ -22,13 +24,13 @@ The documented target architecture is present: Vite 5, strict TypeScript, Tailwi
 
 `docs/developer/branding-guide.md` is the current design source of truth. It now includes Wada-reconciled palette tokens with the original `tcube-landing.html` prototype hex values retained as comments, usage rules, contrast notes, type pairing, the prototype modular type scale, radius guidance, component direction, and a quick reference card.
 
-`docs/developer/README.md` is referenced by `AGENTS.md` but does not currently exist.
+`docs/developer/README.md` exists as the developer documentation index.
 
-`README.md` is still a placeholder.
+`README.md` now contains the project overview, setup commands, validation commands, structure summary, and links to the developer docs.
 
 `docs/notes/product-characteristics.md` is present as an untracked product-spec note. It contains hardware/material/tactile details that may inform product copy and design constraints after validation.
 
-`package.json`, `pnpm-lock.yaml`, `tailwind.config.ts`, `vite.config.ts`, `tsconfig.json`, `eslint.config.js`, `postcss.config.js`, `prettier.config.js`, `justfile`, `index.html`, `build/index.html`, and `src/` were added for the static-site implementation. `three` and `@types/three` are installed for the interactive hero cube.
+`package.json`, `pnpm-lock.yaml`, `tailwind.config.ts`, `vite.config.ts`, `tsconfig.json`, `eslint.config.js`, `postcss.config.js`, `prettier.config.js`, `justfile`, `index.html`, `convex/`, and `src/` were added for the static-site implementation. `three` and `@types/three` are installed for the interactive hero cube. `convex` is installed for the live feature poll.
 
 ## Architectural Decisions
 
@@ -46,7 +48,7 @@ Do not create a second source of truth for colours or typography. If `DESIGN.md`
 
 The current `tcube-landing.html` style and colour direction should be preserved while copy is revised.
 
-The landing page remains static for now: no server, no auth, and no committed secrets.
+The landing page remains static-first: no auth and no committed secrets. Convex is used only for aggregate live poll counts.
 
 The learning-layer claims should stay aligned with `VISION.md`: simple device first, optional local Mac intelligence, family-controlled content, and no cloud dependency for the opt-in learning loop.
 
@@ -56,25 +58,23 @@ Hardware claims in public copy need validation before launch.
 
 `tcube-landing.html` is now a legacy prototype reference outside the documented Vite/Tailwind architecture.
 
-The migrated community section no longer collects email, city, or child ages. It now uses a local feature-interest poll stored in `localStorage`, shows local results after voting, and includes an exit-intent prompt if the visitor leaves through the top of the page before voting. The prompt is armed only after the visitor first moves inside the page, and dismissal through the close button or Escape key is stored so people can decline without being asked again on that device.
+The migrated community section no longer collects email, city, or child ages. It now uses a Convex-backed feature-interest poll when `VITE_CONVEX_URL` is configured, with a localStorage fallback when Convex is absent or unavailable. `localStorage` still stores the device-level vote/dismissal state. The exit-intent prompt is armed only after the visitor first moves inside the page, and dismissal through the close button or Escape key is stored so people can decline without being asked again on that device.
 
 Some documentation placeholders remain outside the branding-guide export, including the missing developer README and root README placeholder.
 
-Automated validation passed after the migration, Three.js cube update, and exit-vote dismissal fix: `pnpm verify` and `pnpm build`.
+Automated validation passed after the migration, Three.js cube update, exit-vote dismissal fix, poll-card design update, Build drawer change, LLM drawer split, README updates, and Convex/Vercel deployment setup: `pnpm verify` and `pnpm build`.
 
 Browser verification for the hero cube passed with Playwright Chromium on desktop `1440x1000` and mobile `390x844`: canvas was nonblank, pixel-diverse, and changed after drag interaction. Screenshots and pixel-check JSON are in `output/playwright/`.
 
 ## Pending Work
 
-Review whether the lazy-loaded Three.js hero chunk size is acceptable for launch. The initial app bundle remains small, but the separate `hero-cube` chunk is about 132 KB gzip.
+Review whether the lazy-loaded Three.js vendor chunk size is acceptable for launch. The initial app bundle remains small, the cube app chunk is about 2 KB gzip, and the separate `three` vendor chunk is about 130 KB gzip.
 
 Revise the landing page wording without losing the current visual direction.
 
-Create `docs/developer/README.md` and replace the root `README.md` placeholder.
-
 Confirm CTA destinations and privacy wording.
 
-Confirm final GitHub/docs URLs used by the Build one page.
+Confirm final GitHub/docs URLs used by the Build and LLM drawers. The firmware CTA currently points to the durable latest-release URL: `https://github.com/campingas/tcube-pi/releases/latest`.
 
 Replace or remove `tcube-landing.html` after the migrated page is visually approved.
 
@@ -84,4 +84,4 @@ First, visually review the migrated Vite page at desktop and mobile widths again
 
 Second, do a copy pass on the migrated Vite page against `VISION.md` while preserving the current structure and visual direction.
 
-Third, confirm final CTA destinations and decide whether the local feature poll needs a backend before launch.
+Third, finish the external Vercel and Convex dashboard setup described in `docs/developer/deployment-guide.md`.

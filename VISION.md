@@ -84,7 +84,7 @@ These are the six things a visitor must be able to say after leaving the page. N
 
 One headline. One subheadline. One visual. One CTA. Nothing else.
 
-The visual is the T-Cube device in a child's hands or on a child's shelf — not a render, not a diagram. The headline follows the canonical product sentence. The CTA points to either the build guide or the feature-interest vote — whichever path is most useful at launch.
+The visual is the T-Cube device in a child's hands or on a child's shelf — not a render, not a diagram. The headline follows the canonical product sentence. The CTA points to either the Open hardware section, the Build drawer, or the feature-interest vote — whichever path is most useful at launch.
 
 The hero does not explain features. It creates enough curiosity and trust that a visitor scrolls.
 
@@ -141,7 +141,7 @@ The result is pushed back to the Pi as an updated playlist. The cube doesn't kno
 
 None of these modes require a screen during the child's session. The cube remains the interface. The Mac is the engine room — invisible, optional, and entirely in the hands of the family.
 
-This section of the landing page sits between the product pitch and the build guide. It should be readable by a non-technical parent (the opt-in framing, the privacy note, the "no account required") and link directly to the `learning.md` reference for families who want to go deeper.
+This section of the landing page sits between the product pitch and the open hardware path. It should be readable by a non-technical parent (the opt-in framing, the privacy note, the "no account required") and link directly to the `learning.md` reference for families who want to go deeper.
 
 ---
 
@@ -157,7 +157,9 @@ For **technically-curious parents**: seeing the build process demystifies the pr
 
 Tone here shifts slightly — still warm, but more direct and technical. This is the one section where precise language ("Raspberry Pi Zero 2W", "I2S audio", "open-source firmware") earns trust rather than alienating.
 
-The learning layer requires a Mac on the same home network running a TTS model and a general-purpose LLM. `learning.md` is the operating document — it ships with sensible defaults and is designed to be edited by parents. Installation is documented in the build guide.
+The build path must expose the firmware download directly. Link to the latest `tcube-pi` GitHub release with `https://github.com/campingas/tcube-pi/releases/latest` so the landing page does not hardcode a version that can become stale.
+
+The learning layer requires a Mac on the same home network running a TTS model and a general-purpose LLM. `learning.md` is the operating document — it ships with sensible defaults and is designed to be edited by parents. Installation is summarized in the Build drawer and documented in the linked assembly notes.
 
 ---
 

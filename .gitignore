@@ -4,10 +4,14 @@ node_modules/
 
 # Build outputs
 output/
-build/
 dist/
 dist-ssr/
 *.local
+
+# Environment
+.env
+.env.local
+.env.*.local
 
 # System Files
 .DS_Store

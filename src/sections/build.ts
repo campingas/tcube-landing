@@ -23,8 +23,9 @@ const html = /* html */ `
           families.
         </p>
         <div class="build-actions">
-          <a href="/build/" class="button-primary">View build guide →</a>
-          <a href="#" class="button-ghost">↗ GitHub</a>
+          <a href="#build-drawer" class="button-primary" data-build-drawer-trigger>View build guide</a>
+          <a href="https://github.com/campingas/tcube-pi" class="button-ghost" target="_blank" rel="noopener noreferrer">View T-Cube code</a>
+          <a href="https://github.com/campingas/tcube-pi/releases/latest" class="button-ghost build-firmware-cta" target="_blank" rel="noopener noreferrer">Download latest firmware</a>
         </div>
       </div>
 
@@ -43,12 +44,16 @@ const html = /* html */ `
           <span class="bom-detail">I2S amplifier</span>
         </div>
         <div class="bom-item">
-          <span class="bom-name">MPU-6050</span>
-          <span class="bom-detail">IMU / orientation</span>
-        </div>
-        <div class="bom-item">
           <span class="bom-name">3W speaker</span>
           <span class="bom-detail">Audio output</span>
+        </div>
+        <div class="bom-item">
+          <span class="bom-name">INMP441</span>
+          <span class="bom-detail">I2S microphone</span>
+        </div>
+        <div class="bom-item">
+          <span class="bom-name">MPU-6050</span>
+          <span class="bom-detail">IMU / orientation</span>
         </div>
         <div class="bom-item">
           <span class="bom-name">3D-printed enclosure</span>
